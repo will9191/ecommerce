@@ -4,8 +4,11 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: "#11111"
-      }
+        primary: "#11111",
+      },
+      fontFamily: {
+        primary: "Rationale",
+      },
     },
   },
   plugins: [],

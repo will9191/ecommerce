@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
+import { RouterLink } from '@angular/router';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import {
   heroShoppingCart,
@@ -11,7 +12,7 @@ import {
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [MatIconModule, NgIconComponent],
+  imports: [MatIconModule, NgIconComponent, RouterLink],
   viewProviders: [
     provideIcons({
       heroShoppingCart,

@@ -1,5 +1,95 @@
+@use "@angular/material" as mat;
+
+$light-text: #ffffff;
+$light-primary-text: $light-text;
+$light-accent-text: rgba($light-primary-text, 0.7);
+$light-disabled-text: rgba($light-primary-text, 0.5);
+$light-dividers: rgba($light-primary-text, 0.12);
+$light-focused: rgba($light-primary-text, 0.12);
+
+$dark-text: #000000;
+$dark-primary-text: rgba($dark-text, 0.87);
+$dark-accent-text: rgba($dark-primary-text, 0.54);
+$dark-disabled-text: rgba($dark-primary-text, 0.38);
+$dark-dividers: rgba($dark-primary-text, 0.12);
+$dark-focused: rgba($dark-primary-text, 0.12);
+
+$custom-primary-palette: (
+  50: #f7f7f7,
+  100: #eeeeee,
+  200: #e1e1e1,
+  300: #cfcfcf,
+  400: #aaaaaa,
+  500: #898989,
+  600: #626262,
+  700: #4f4f4f,
+  800: #313131,
+  900: #111111,
+  // For slide toggle,
+  contrast:
+    (
+      main: $light-primary-text,
+      lighter: $dark-primary-text,
+      darker: $light-primary-text,
+    ),
+);
+
+$custom-accent-palette: (
+  50: #ffffff,
+  100: #fafafa,
+  200: #f5f5f5,
+  300: #f0f0f0,
+  400: #dedede,
+  500: #c2c2c2,
+  600: #979797,
+  700: #818181,
+  800: #606060,
+  900: #3c3c3c,
+  // For slide toggle,
+  contrast:
+    (
+      main: $dark-primary-text,
+      lighter: $dark-primary-text,
+      darker: $dark-primary-text,
+    ),
+);
+
+$custom-warn-palette: (
+  50: #fbe8ea,
+  100: #f6c5c8,
+  200: #df8e89,
+  300: #cd635d,
+  400: #d24137,
+  500: #d12e18,
+  600: #c32419,
+  700: #b31914,
+  800: #a6100d,
+  900: #970000,
+  // For slide toggle,
+  contrast:
+    (
+      main: $light-primary-text,
+      lighter: $dark-primary-text,
+      darker: $light-primary-text,
+    ),
+);
+
+$custom-primary: mat.define-palette($custom-primary-palette);
+$custom-accent: mat.define-palette($custom-accent-palette);
+$custom-warn: mat.define-palette($custom-warn-palette);
+
+$custom-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $custom-primary,
+      accent: $custom-accent,
+      warn: $custom-warn,
+    ),
+  )
+);
+@include mat.all-component-themes($custom-theme);
+
 /* You can add global styles to this file, and also import other style files */
-@tailwind base;
 @tailwind components;
 @tailwind utilities;
 
