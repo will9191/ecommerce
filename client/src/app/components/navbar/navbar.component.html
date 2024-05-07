@@ -1,18 +1,32 @@
-<div class="bg-white items-center grid grid-cols-3 w-full justify-center ">
-  <div class="flex justify-center">
-    <ng-icon name="heroMagnifyingGlass" />
+<div class="fixed w-full">
+  <div
+    class="bg-white items-center grid grid-cols-3 w-full justify-center my-4"
+  >
+    <div class="flex justify-center">
+      <ng-icon name="heroMagnifyingGlass" />
+    </div>
+    <div class="flex flex-col text-center cursor-pointer" routerLink="">
+      W <span>Clothing</span>
+    </div>
+    <div class="space-x-4 flex justify-center">
+      <ng-icon class="cursor-pointer" name="heroShoppingCart" />
+      <ng-icon
+        routerLink="user"
+        name="heroUser"
+        class="cursor-pointer"
+      ></ng-icon>
+      <ng-icon class="cursor-pointer" name="heroInformationCircle" />
+    </div>
   </div>
-  <p class="flex flex-col text-center">
-    W <span>Clothing</span>
-  </p>
-  <div class="space-x-4 flex justify-center">
-    <ng-icon name="heroShoppingCart" />
-    <ng-icon routerLink="login" name="heroUser" />
-    <ng-icon name="heroInformationCircle" />
+  <div class="flex space-x-10 items-center justify-center">
+    @for (category of categories; track $index) {
+    <div
+      class="cursor-pointer"
+      routerLink="{{ category.referenceName }}/products"
+    >
+      {{ category.name }}
+    </div>
+    }
   </div>
 </div>
-<div class="flex space-x-10 items-center justify-center">
-  <p>Drop Z</p>
-  <p>Drop X</p>
-  <p>Drop Y</p>
-</div>
+<router-outlet></router-outlet>

@@ -1,0 +1,15 @@
+<div class="h-screen items-center text-center justify-center flex">
+  <div class="w-1/2 h-5/6">
+    <img class="w-full h-full" src="{{ product.image }}" alt="" />
+  </div>
+  <div class="w-1/2 h-1/2 flex flex-col">
+    <div>{{ product.name }}</div>
+    <div>$ {{ product.price }}</div>
+    <div>{{ product.description }}</div>
+    <div class="flex gap-5 justify-center">
+      @for (size of product.sizes; track $index) {
+      <div>{{ size.name }}</div>
+      }
+    </div>
+  </div>
+</div>

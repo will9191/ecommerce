@@ -5,7 +5,12 @@ export const apiEndpoint = {
     authenticate: `${API_URL}/api/v1/auth/authenticate`,
     register: `${API_URL}/api/v1/auth/register`
   },
-  productEndpoint: {
+  ProductEndpoint: {
     base: `${API_URL}/api/v1/product`,
+    getById: `${API_URL}/api/v1/product`,
+  },
+  CategoryEndpoint: {
+    base: `${API_URL}/api/v1/category`,
+    getByReferenceName: `${API_URL}/api/v1/category`,
   }
 }
