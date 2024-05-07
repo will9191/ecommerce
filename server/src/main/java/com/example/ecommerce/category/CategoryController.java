@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1/category")
@@ -23,6 +24,11 @@ public class CategoryController {
     @GetMapping
     public ResponseEntity<List<Category>> getAll() {
         return ResponseEntity.ok(service.findAll());
+    }
+
+    @GetMapping("/{referenceName}")
+    public ResponseEntity<Optional<Category>> getProductsByCategory(@PathVariable String referenceName) {
+        return ResponseEntity.ok(service.findByReferenceName(referenceName));
     }
 
     @PutMapping

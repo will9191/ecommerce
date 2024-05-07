@@ -13,12 +13,16 @@ public class CategoryService {
     private final CategoryRepository repository;
 
     public void save(CategoryDto request) {
-        var category  = Category.builder().name(request.getName()).description(request.getDescription()).imageUrl(request.getImageUrl()).build();
+        var category  = Category.builder().name(request.getName()).referenceName(request.getReferenceName()).description(request.getDescription()).imageUrl(request.getImageUrl()).build();
         repository.save(category);
     }
 
     public List<Category> findAll() {
         return repository.findAll();
+    }
+
+    public Optional<Category> findByReferenceName(String referenceName) {
+        return repository.findByReferenceName(referenceName);
     }
 
     public void update(CategoryDto request) {

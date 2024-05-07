@@ -20,6 +20,7 @@ public class Category {
     @GeneratedValue
     private Long categoryId;
     private String name;
+    private String referenceName;
     private String description;
     private String imageUrl;
 
