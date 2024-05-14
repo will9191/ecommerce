@@ -1,6 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CategoryService } from 'src/app/services/category.service';
+import { CategoryService } from '../../../services/category.service';
 import { RouterModule } from '@angular/router';
 
 @Component({
@@ -10,7 +10,7 @@ import { RouterModule } from '@angular/router';
   templateUrl: './category-products.component.html',
   styleUrl: './category-products.component.css',
 })
-export class CategoryProductsComponent implements OnInit {
+export class CategoryProductsComponent implements OnChanges {
   constructor(private categoryService: CategoryService) {}
 
   @Input()
@@ -18,7 +18,7 @@ export class CategoryProductsComponent implements OnInit {
 
   products: any;
 
-  ngOnInit(): void {
+  ngOnChanges(): void {
     this.getProductsByCategory();
   }
 

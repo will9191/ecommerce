@@ -1,10 +1,14 @@
+@defer (when products) {
 <div class="h-screen flex items-center">
   <div class="grid grid-cols-3 w-full justify-center items-center text-center">
     @for (product of products; track $index) {
-    <div class="" routerLink="/product/{{ product.productId }}">
+    <div class="" [routerLink]="['/product', product.productId]">
       <img class="w-96" src="{{ product.image }}" alt="" />
       <div>{{ product.name }}</div>
     </div>
     }
   </div>
 </div>
+} @placeholder {
+<div class="flex h-screen justify-center items-center">loading...</div>
+}

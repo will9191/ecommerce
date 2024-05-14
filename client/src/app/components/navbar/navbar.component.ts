@@ -15,7 +15,7 @@ import {
   heroInformationCircle,
   heroMagnifyingGlass,
 } from '@ng-icons/heroicons/outline';
-import { CategoryService } from 'src/app/services/category.service';
+import { CategoryService } from '../../services/category.service';
 
 @Component({
   selector: 'app-navbar',

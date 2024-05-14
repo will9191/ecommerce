@@ -1,3 +1,4 @@
+@defer (when product) {
 <div class="h-screen items-center text-center justify-center flex">
   <div class="w-1/2 h-5/6">
     <img class="w-full h-full" src="{{ product.image }}" alt="" />
@@ -8,8 +9,11 @@
     <div>{{ product.description }}</div>
     <div class="flex gap-5 justify-center">
       @for (size of product.sizes; track $index) {
-      <div>{{ size.name }}</div>
+      <div class="bg-gray-200 p-3 rounded-lg">{{ size.name }}</div>
       }
     </div>
   </div>
 </div>
+} @placeholder {
+  <div class="h-screen items-center justify-center flex">loading...</div>
+}

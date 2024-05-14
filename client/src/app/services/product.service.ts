@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable, OnInit } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { apiEndpoint } from '../constants/constants';
 
@@ -9,13 +9,13 @@ import { apiEndpoint } from '../constants/constants';
 export class ProductService {
   constructor(private httpClient: HttpClient) {}
 
-  getProductById(id: number) {
+  getProductById(id: number): Observable<any> {
     return this.httpClient.get<any>(
       `${apiEndpoint.ProductEndpoint.getById}/${id}`
     );
   }
 
-  getAllProducts() {
+  getAllProducts(): Observable<any> {
     return this.httpClient.get<any>(`${apiEndpoint.ProductEndpoint.getById}`);
   }
 }
