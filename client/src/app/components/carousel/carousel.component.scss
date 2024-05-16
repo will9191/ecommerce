@@ -1,24 +1,22 @@
 .carousel-container {
   position: relative;
-  margin: auto;
+  margin-top: var(--navbar-height);
   text-align: center;
-  width: 700px;
-  border-radius: 15px;
   box-shadow: 0 6px 12px rgb(187, 187, 187);
 }
 .carousel-container img {
   display: none;
-  border-radius: 15px;
 }
 
 .carousel-container img.image-active {
   display: block;
   width: 100%;
-  height: 400px;
+  height: 700px;
+ 
 }
 
 // dots/indicators
-.carousel-dot-container{
+.carousel-dot-container {
   position: absolute;
   right: 0;
   left: 0;
@@ -29,7 +27,7 @@
   margin-bottom: 1rem;
 }
 
-.dot{
+.dot {
   cursor: pointer;
   height: 13px;
   width: 13px;
@@ -42,22 +40,60 @@
 }
 
 .active,
-.dot:hover{
+.dot:hover {
   opacity: 1;
 }
 
-.fade{
+.fade {
   animation-name: fade;
   animation-duration: 1.5s;
 }
 
 @keyframes fade {
-  from{
+  from {
     opacity: 0.4;
   }
-  to{
+  to {
     opacity: 1;
   }
 }
 
-.btn-prev{}
+.btn-prev {
+  background-color: inherit;
+  border: none;
+  display: flex;
+  align-items: center;
+  color: black;
+  font-size: 50px;
+  margin: 0 50px;
+  padding: 0;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+}
+
+.btn-next {
+  background-color: inherit;
+  border: none;
+  display: flex;
+  align-items: center;
+  color: black;
+  font-size: 50px;
+  margin: 0 50px;
+  padding: 0;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+}
+
+.icon-carousel {
+  cursor: pointer;
+  background-color: white;
+  height: 58px;
+  width: 58px;
+  border-radius: 50%;
+}
+

@@ -17,19 +17,11 @@
     ></span>
   </div>
 
-  <button
-    *ngIf="controls"
-    class="btn-carousel btn-prev"
-    (click)="onPrevClick()"
-  >
-    <i class="icon-carousel icon-prev">{{ btnPrev }}</i>
+  <button *ngIf="controls" class="btn-carousel btn-prev">
+    <i class="icon-carousel icon-prev" (click)="onPrevClick()">{{ btnPrev }}</i>
   </button>
 
-  <button
-    *ngIf="controls"
-    class="btn-carousel btn-next"
-    (click)="onNextClick()"
-  >
-    <i class="icon-carousel icon-next">{{ btnNext }}</i>
+  <button *ngIf="controls" class="btn-carousel btn-next">
+    <i class="icon-carousel icon-next" (click)="onNextClick()">{{ btnNext }}</i>
   </button>
 </div>

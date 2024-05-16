@@ -1,0 +1,15 @@
+<div class="shadow-md bg-neutral-600 fixed bottom-0 top-0">
+  <div class="flex-col flex gap-6 mt-3 px-3 items-center">
+    <div routerLink="/dashboard/users" class="text-white cursor-pointer">W</div>
+    @for (menuItem of menuItems; track $index) {
+
+    <fa-icon
+      class="text-white cursor-pointer"
+      [routerLink]="menuItem.link"
+      [icon]="menuItem.icon"
+    ></fa-icon>
+    
+    }
+  </div>
+</div>
+<router-outlet></router-outlet>

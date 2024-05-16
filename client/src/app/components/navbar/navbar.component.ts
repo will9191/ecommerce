@@ -1,20 +1,23 @@
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import {
+  AfterViewInit,
   Component,
+  ElementRef,
   Inject,
-  OnChanges,
   OnInit,
   PLATFORM_ID,
+  ViewChild,
 } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterLink, RouterModule } from '@angular/router';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import {
-  heroShoppingCart,
-  heroUser,
-  heroInformationCircle,
-  heroMagnifyingGlass,
-} from '@ng-icons/heroicons/outline';
+  matShoppingCartOutline,
+  matPersonOutline,
+  matInfoOutline,
+  matSearchOutline,
+  matDashboardOutline,
+} from '@ng-icons/material-icons/outline';
 import { CategoryService } from '../../services/category.service';
 
 @Component({
@@ -29,10 +32,11 @@ import { CategoryService } from '../../services/category.service';
   ],
   viewProviders: [
     provideIcons({
-      heroShoppingCart,
-      heroUser,
-      heroInformationCircle,
-      heroMagnifyingGlass,
+      matShoppingCartOutline,
+      matPersonOutline,
+      matInfoOutline,
+      matSearchOutline,
+      matDashboardOutline,
     }),
   ],
   templateUrl: './navbar.component.html',
@@ -43,6 +47,7 @@ export class NavbarComponent implements OnInit {
     @Inject(PLATFORM_ID) private platformId: Object,
     private categoryService: CategoryService
   ) {}
+
   isLoggedIn: any;
   categories: any;
 

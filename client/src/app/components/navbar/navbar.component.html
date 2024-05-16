@@ -1,21 +1,20 @@
-<div class="fixed w-full top-0">
-  <div
-    class=" items-center grid grid-cols-3 w-full justify-center my-4"
-  >
+<nav id="navbar" class="navbar fixed w-full top-0 z-50 bg-white">
+  <div class="items-center grid grid-cols-3 w-full justify-center my-4">
     <div class="flex justify-center">
-      <ng-icon name="heroMagnifyingGlass" />
+      <ng-icon name="matSearchOutline" />
     </div>
     <div class="flex flex-col text-center cursor-pointer" routerLink="">
       W <span>Clothing</span>
     </div>
     <div class="space-x-4 flex justify-center">
-      <ng-icon class="cursor-pointer" name="heroShoppingCart" />
+      <ng-icon routerLink="admin/dashboard" *ngIf="isLoggedIn" class="cursor-pointer" name="matDashboardOutline"/>
+      <ng-icon class="cursor-pointer" name="matShoppingCartOutline" />
       <ng-icon
         routerLink="user"
-        name="heroUser"
+        name="matPersonOutline"
         class="cursor-pointer"
       ></ng-icon>
-      <ng-icon class="cursor-pointer" name="heroInformationCircle" />
+      <ng-icon class="cursor-pointer" name="matInfoOutline" />
     </div>
   </div>
   <div class="flex space-x-10 items-center justify-center">
@@ -28,5 +27,7 @@
     </div>
     }
   </div>
+</nav>
+<div id="mainContainer">
+  <router-outlet></router-outlet>
 </div>
-<router-outlet></router-outlet>

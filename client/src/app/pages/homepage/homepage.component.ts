@@ -9,7 +9,7 @@ import { RouterModule } from '@angular/router';
   imports: [CommonModule, CarouselComponent, RouterModule],
   providers: [CarouselComponent],
   templateUrl: './homepage.component.html',
-  styleUrl: './homepage.component.css',
+  styleUrl: './homepage.component.scss',
 })
 export class HomepageComponent {
   constructor() {
