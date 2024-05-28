@@ -31,7 +31,10 @@ export class AuthGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    this.accessToken = localStorage.getItem('access_token');
+      
+    if (isPlatformBrowser(this.platformId)) {
+      this.accessToken = localStorage.getItem('access_token');
+    }
 
     if (isPlatformBrowser(this.platformId) && this.accessToken) {
       return true;

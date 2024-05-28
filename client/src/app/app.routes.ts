@@ -16,6 +16,7 @@ import { DashboardProductsComponent } from './components/dashboard/dashboard-pro
 import { DashboardUsersComponent } from './components/dashboard/dashboard-users/dashboard-users.component';
 import { DashboardOrdersComponent } from './components/dashboard/dashboard-orders/dashboard-orders.component';
 import { DashboardSizesComponent } from './components/dashboard/dashboard-sizes/dashboard-sizes.component';
+import { CartItemComponent } from './components/cart-item/cart-item.component';
 
 export const routes: Routes = [
   {
@@ -44,6 +45,12 @@ export const routes: Routes = [
         path: 'user',
         component: UserComponent,
         title: 'User',
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'cart',
+        component: CartItemComponent,
+        title: 'Cart',
         canActivate: [AuthGuard],
       },
     ],

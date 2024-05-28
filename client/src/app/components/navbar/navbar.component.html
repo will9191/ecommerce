@@ -1,4 +1,4 @@
-<nav id="navbar" class="navbar fixed w-full top-0 z-50 bg-white">
+<nav id="navbar" class="navbar fixed w-full top-0 z-40 bg-white">
   <div class="items-center grid grid-cols-3 w-full justify-center my-4">
     <div class="flex justify-center">
       <ng-icon name="matSearchOutline" />
@@ -6,9 +6,21 @@
     <div class="flex flex-col text-center cursor-pointer" routerLink="">
       W <span>Clothing</span>
     </div>
-    <div class="space-x-4 flex justify-center">
-      <ng-icon routerLink="admin/dashboard" *ngIf="isLoggedIn" class="cursor-pointer" name="matDashboardOutline"/>
-      <ng-icon class="cursor-pointer" name="matShoppingCartOutline" />
+    <div class="space-x-4 flex justify-center items-center">
+      <ng-icon
+        routerLink="admin/dashboard"
+        *ngIf="isLoggedIn"
+        class="cursor-pointer"
+        name="matDashboardOutline"
+      />
+      <div class="relative flex p-1.5" (click)="openCart()">
+        <div
+          class="absolute top-0 right-0 bg-red-800 text-white w-3.5 h-3.5 rounded-full text-xs items-center justify-center flex"
+        >
+          {{ cartLength }}
+        </div>
+        <ng-icon class="cursor-pointer" name="matShoppingCartOutline" />
+      </div>
       <ng-icon
         routerLink="user"
         name="matPersonOutline"
@@ -28,6 +40,7 @@
     }
   </div>
 </nav>
+<app-cart-item *ngIf="isOpen" [cartItems]="cartItems"></app-cart-item>
 <div id="mainContainer">
   <router-outlet></router-outlet>
 </div>

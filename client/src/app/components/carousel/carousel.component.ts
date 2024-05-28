@@ -34,7 +34,6 @@ export class CarouselComponent implements OnInit {
     if (this.autoSlide) {
       this.autoSlideImages();
     }
-    console.log(this.images);
   }
 
   autoSlideImages(): void {

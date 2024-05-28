@@ -19,6 +19,8 @@ import {
   matDashboardOutline,
 } from '@ng-icons/material-icons/outline';
 import { CategoryService } from '../../services/category.service';
+import { CartService } from '../../services/cart.service';
+import { CartItemComponent } from '../cart-item/cart-item.component';
 
 @Component({
   selector: 'app-navbar',
@@ -29,6 +31,7 @@ import { CategoryService } from '../../services/category.service';
     RouterLink,
     CommonModule,
     RouterModule,
+    CartItemComponent,
   ],
   viewProviders: [
     provideIcons({
@@ -45,17 +48,37 @@ import { CategoryService } from '../../services/category.service';
 export class NavbarComponent implements OnInit {
   constructor(
     @Inject(PLATFORM_ID) private platformId: Object,
-    private categoryService: CategoryService
+    private categoryService: CategoryService,
+    private cartService: CartService
   ) {}
 
   isLoggedIn: any;
   categories: any;
+  isOpen: boolean = true;
+
+  cartItems: any;
+  cartLength: any;
 
   ngOnInit(): void {
     if (isPlatformBrowser(this.platformId)) {
       this.isLoggedIn = localStorage.getItem('access_token');
     }
     this.getCategories();
+    this.getCartItems();
+  }
+
+  getCartItems() {
+    this.cartService.getCartItems().subscribe({
+      next: (data: any) => {
+        this.cartItems = data;
+        this.cartLength = data.length;
+        console.log(data);
+      },
+    });
+  }
+
+  openCart() {
+    this.isOpen = !this.isOpen;
   }
 
   getCategories() {

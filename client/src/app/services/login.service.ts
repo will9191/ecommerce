@@ -24,9 +24,17 @@ export class LoginService {
         tap((value) => {
           if (isPlatformBrowser(this.platformId)) {
             localStorage.setItem('access_token', value.access_token),
-            localStorage.setItem('refresh_token', value.refresh_token);
+              localStorage.setItem('refresh_token', value.refresh_token);
+            this.getAuthToken();
           }
         })
       );
+  }
+
+  getAuthToken(): any {
+    if (isPlatformBrowser(this.platformId)) {
+      console.log(localStorage.getItem('access_token'));
+      return localStorage.getItem('access_token');
+    }
   }
 }
