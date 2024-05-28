@@ -5,6 +5,7 @@ import com.example.ecommerce.order.Order;
 import com.example.ecommerce.cart.Cart;
 import com.example.ecommerce.token.Token;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
@@ -13,9 +14,11 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 
-@Data
+@Getter
+@Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -33,8 +36,12 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
-    private Cart cart;
+    @OneToMany
+//    @JsonIgnoreProperties({"carts"})
+    private List<Cart> carts;
+
+//    @OneToMany
+//    private Set<Order> orders;
 
 
     @OneToMany(mappedBy = "user")

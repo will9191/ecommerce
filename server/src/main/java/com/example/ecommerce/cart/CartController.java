@@ -1,7 +1,5 @@
 package com.example.ecommerce.cart;
 
-import com.example.ecommerce.cartItem.CartItem;
-import com.example.ecommerce.cartItem.CartItemDto;
 import com.example.ecommerce.product.Product;
 import com.example.ecommerce.product.ProductDto;
 import com.example.ecommerce.product.ProductRepository;
@@ -25,30 +23,30 @@ import java.util.Set;
 @RequiredArgsConstructor
 public class CartController {
     private final CartService service;
+    private final CartRepository cartRepository;
     private final ProductRepository repository;
     private final UserService userService;
 
     @PostMapping("/add")
-    public ResponseEntity<?> addItemToCart(@RequestBody CartItemDto cartItemDto, Principal user) throws Exception {
-        Product product = repository.findByProductId(cartItemDto.getProductId());
+    public ResponseEntity<?> addItemToCart(@RequestBody CartDto cartDto, Principal user) throws Exception {
+        Product product = repository.findByProductId(cartDto.getProductId());
 
         var optionalUser = userService.getCurrentUser(user);
 
-
-        service.addItemToCart(cartItemDto, product, optionalUser);
+        service.addItemToCart(cartDto, product, optionalUser);
         return ResponseEntity.ok("cartItemDto");
     }
 
-//    @GetMapping("/public/users/{emailId}/carts/{cartId}")
-//    public ResponseEntity<CartDto> getCartById(@PathVariable String emailId, @PathVariable Long cartId) {
-//        CartDto cartDto = cartService.getCart(emailId, cartId);
-//
-//        return new ResponseEntity<CartDto>(cartDto, HttpStatus.OK);
-//    }
+    @GetMapping("/cartItems")
+    public ResponseEntity<List<Cart>> getCartItemsByUser(Principal principalUser) {
+        User user = userService.getCurrentUser(principalUser);
+        return ResponseEntity.ok(cartRepository.findAllByUser(user));
+    }
 
-    @GetMapping("/cartItem")
-    public ResponseEntity<List<CartItem>> getAllCartItems(){
-        return ResponseEntity.ok(service.getCartItem());
+    @DeleteMapping("/remove")
+    public ResponseEntity<?> removeCartItem(@RequestParam Long cartId) throws Exception {
+        service.removeCartItem(cartId);
+        return ResponseEntity.ok("removed");
     }
 
     @GetMapping

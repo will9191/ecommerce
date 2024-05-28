@@ -49,13 +49,29 @@ public class EcommerceApplication {
                     .build();
             System.out.println("Admin token: " + service.register(admin).getAccessToken());
 
-            var category = CategoryDto.builder()
+            var category1 = CategoryDto.builder()
                     .name("Drop X")
                     .referenceName("drop-x")
                     .description("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sit amet mattis vulputate enim nulla aliquet porttitor. Accumsan.")
                     .imageUrl("https://pbs.twimg.com/media/EYHAwfjXkAA0MXb.jpg:large")
                     .build();
-            categoryService.save(category);
+            categoryService.save(category1);
+
+            var category2 = CategoryDto.builder()
+                    .name("Drop Y")
+                    .referenceName("drop-Y")
+                    .description("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sit amet mattis vulputate enim nulla aliquet porttitor. Accumsan.")
+                    .imageUrl("https://pbs.twimg.com/media/EYHAwfjXkAA0MXb.jpg:large")
+                    .build();
+            categoryService.save(category2);
+
+            var category3 = CategoryDto.builder()
+                    .name("Drop Z")
+                    .referenceName("drop-z ")
+                    .description("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sit amet mattis vulputate enim nulla aliquet porttitor. Accumsan.")
+                    .imageUrl("https://pbs.twimg.com/media/EYHAwfjXkAA0MXb.jpg:large")
+                    .build();
+            categoryService.save(category3);
 
 
             var size1 = new Size(SizeType.P, 100);

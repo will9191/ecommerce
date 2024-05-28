@@ -1,13 +1,11 @@
 package com.example.ecommerce.cart;
 
-import com.example.ecommerce.cartItem.CartItem;
+import com.example.ecommerce.product.Product;
+import com.example.ecommerce.size.Size;
 import com.example.ecommerce.user.User;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -15,9 +13,11 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-@Data
+@Getter
+@Setter
 @Builder
 @AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "cart")
 public class Cart {
@@ -25,20 +25,17 @@ public class Cart {
     @GeneratedValue
     private Long cartId;
 
-    @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "user_id")
-    @JsonIgnoreProperties({"cart", "tokens", "password", "authorities"})
+    @ManyToOne
+    @JsonIgnoreProperties({"carts", "tokens", "password", "authorities"})
     private User user;
 
+    @OneToOne
+    @JsonIgnoreProperties
+    private Product product;
+    @Embedded
+    private Size size;
 
-    @OneToMany(mappedBy = "cartItemId", cascade = CascadeType.ALL)
-    private Set<CartItem> cartItems;
+    private Double price = 0.0;
 
-    private double totalPrice = 0.0;
-
-    public Cart() {
-        this.cartItems = new HashSet<>();
-        this.totalPrice = 0.0;
-    }
 
 }
