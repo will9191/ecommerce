@@ -43,10 +43,10 @@ public class CartController {
         return ResponseEntity.ok(cartRepository.findAllByUser(user));
     }
 
-    @DeleteMapping("/remove")
-    public ResponseEntity<?> removeCartItem(@RequestParam Long cartId) throws Exception {
+    @DeleteMapping("/remove/{cartId}")
+    public ResponseEntity<?> removeCartItem(@PathVariable Long cartId) throws Exception {
         service.removeCartItem(cartId);
-        return ResponseEntity.ok("removed");
+        return ResponseEntity.ok(cartId);
     }
 
     @GetMapping
