@@ -10,10 +10,14 @@ export class CartService {
   constructor(private httpClient: HttpClient) {}
 
   getCartItems(): Observable<any> {
-    return this.httpClient.get<any>(`${apiEndpoint.CartEndpoint.base}/cartItems`);
+    return this.httpClient.get<any>(
+      `${apiEndpoint.CartEndpoint.base}/cartItems`
+    );
   }
 
-  removeCartItem(id:number): Observable<any> {
-    return this.httpClient.delete<any>(`${apiEndpoint.CartEndpoint.remove}?cartId=${id}`)
+  removeCartItem(id: number): Observable<any> {
+    return this.httpClient.delete<any>(
+      `${apiEndpoint.CartEndpoint.remove}/${id}`
+    );
   }
 }

@@ -2,6 +2,7 @@
   class="fixed p-10 items-center z-50 min-w-52 top-0 right-0 bottom-0 bg-white shadow-xl"
 >
   <p class="text-center">My Cart</p>
+  <div class="absolute text-red-800 cursor-pointer text-7xl flex top-0 left-0" (click)="closeCart()">&times;</div>
   @for (cartItem of cartItems; track $index) {
   <div class="flex items-center">
     <div>

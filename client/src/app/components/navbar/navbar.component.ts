@@ -3,6 +3,7 @@ import {
   AfterViewInit,
   Component,
   ElementRef,
+  inject,
   Inject,
   OnInit,
   PLATFORM_ID,
@@ -54,7 +55,7 @@ export class NavbarComponent implements OnInit {
 
   isLoggedIn: any;
   categories: any;
-  isOpen: boolean = true;
+  isOpen: boolean = false;
 
   cartItems: any;
   cartLength: any;

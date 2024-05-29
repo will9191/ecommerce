@@ -40,7 +40,7 @@
     }
   </div>
 </nav>
-<app-cart-item *ngIf="isOpen" [cartItems]="cartItems"></app-cart-item>
+<app-cart-item [cartItems]="cartItems" *ngIf="isOpen"></app-cart-item>
 <div id="mainContainer">
   <router-outlet></router-outlet>
 </div>
