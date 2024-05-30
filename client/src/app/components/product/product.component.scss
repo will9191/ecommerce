@@ -1,0 +1,35 @@
+.inputClass {
+  position: absolute;
+  clip: rect(1px, 1px, 1px, 1px);
+  clip: rect(1px 1px 1px 1px);
+}
+
+.labelClass {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 48px;
+  width: 78px;
+  box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.1);
+}
+
+.selectClass {
+  list-style: none;
+  display: flex;
+  gap: 2rem;
+}
+
+.optionClass:has(input:checked) .labelClass {
+  border: 1px solid black;
+}
+
+.btn {
+  outline: none;
+  border: none;
+  background: green;
+  font-size: 1rem;
+  text-transform: uppercase;
+  padding: 2rem 4rem;
+  color: white;
+  border-radius: 10px;
+}

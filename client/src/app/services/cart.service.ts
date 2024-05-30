@@ -20,4 +20,10 @@ export class CartService {
       `${apiEndpoint.CartEndpoint.remove}/${id}`
     );
   }
+
+  addToCart(data:any):Observable<any> {
+    return this.httpClient.post<any>(
+      `${apiEndpoint.CartEndpoint.add}`, data
+    )
+  }
 }

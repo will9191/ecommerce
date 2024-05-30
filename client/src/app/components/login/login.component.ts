@@ -27,7 +27,7 @@ loginForm!: FormGroup<LoginForm>;
 constructor(
   private router: Router,
   private loginService: LoginService,
-  private toastService: ToastrService
+  private toastrService: ToastrService
 ) {
   this.loginForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
@@ -37,8 +37,8 @@ constructor(
 
   submit(){
     this.loginService.login(this.loginForm.value.email, this.loginForm.value.password).subscribe({
-      next: () => this.toastService.success("Successfully login!"),
-      error: () => this.toastService.error("Error on login!")
+      next: () => this.toastrService.success("Successfully login!"),
+      error: () => this.toastrService.error("Error on login!")
     })
   }
 

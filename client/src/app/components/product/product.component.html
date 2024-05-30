@@ -7,13 +7,28 @@
     <div>{{ product.name }}</div>
     <div>$ {{ product.price }}</div>
     <div>{{ product.description }}</div>
-    <div class="flex gap-5 justify-center">
-      @for (size of product.sizes; track $index) {
-      <div class="bg-gray-200 p-3 rounded-lg">{{ size.name }}</div>
-      }
+    <div class="items-center justify-center flex flex-col">
+      <ul class="selectClass">
+        @for (size of product.sizes; track $index) {
+        <li class="optionClass">
+          <input
+            id="{{ size.name }}"
+            type="radio"
+            name="size"
+            value="{{ size.name }}"
+            class="inputClass"
+            (click)="click(size.name)"
+          />
+          <label class="labelClass" for="{{ size.name }}">
+            {{ size.name }}
+          </label>
+        </li>
+        }
+      </ul>
+      <button class="btn" (click)="submit()">Add To Cart</button>
     </div>
   </div>
 </div>
 } @placeholder {
-  <div class="h-screen items-center justify-center flex">loading...</div>
+<div class="h-screen items-center justify-center flex">loading...</div>
 }

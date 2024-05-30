@@ -58,7 +58,7 @@ export class NavbarComponent implements OnInit {
   isOpen: boolean = false;
 
   cartItems: any;
-  cartLength: any;
+  cartLength: any = 0;
 
   ngOnInit(): void {
     if (isPlatformBrowser(this.platformId)) {
