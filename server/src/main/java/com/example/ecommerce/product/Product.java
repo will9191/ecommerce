@@ -9,6 +9,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -20,6 +21,7 @@ import java.util.Set;
 @AllArgsConstructor
 @Entity
 @Table(name = "products")
+@Transactional
 public class Product {
     @Id
     @GeneratedValue
@@ -33,6 +35,6 @@ public class Product {
     @JsonIgnore
     private Category category;
     @Embedded
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     private Set<Size> sizes;
 }

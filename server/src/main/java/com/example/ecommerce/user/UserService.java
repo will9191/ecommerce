@@ -20,6 +20,8 @@ public class UserService {
                 .firstName(user.getFirstName())
                 .lastName(user.getLastName())
                 .email(user.getEmail())
+                .cart(user.getCart())
+                .tokens(user.getTokens())
                 .role(user.getRole()).build();
     }
 

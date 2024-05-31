@@ -5,6 +5,7 @@ import com.example.ecommerce.product.Product;
 import com.example.ecommerce.product.ProductDto;
 import com.example.ecommerce.size.Size;
 import com.example.ecommerce.user.User;
+import jakarta.persistence.Embedded;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -20,5 +21,6 @@ import java.util.Set;
 @AllArgsConstructor
 public class CartDto {
     private Long productId;
+    @Embedded
     private Size size;
 }

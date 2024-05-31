@@ -36,9 +36,9 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    @OneToMany
-//    @JsonIgnoreProperties({"carts"})
-    private List<Cart> carts;
+    @OneToOne
+    @JsonIgnoreProperties({"user"})
+    private Cart cart;
 
 //    @OneToMany
 //    private Set<Order> orders;

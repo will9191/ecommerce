@@ -1,5 +1,6 @@
 package com.example.ecommerce.cart;
 
+import com.example.ecommerce.cartItem.CartItemDto;
 import com.example.ecommerce.product.Product;
 import com.example.ecommerce.product.ProductDto;
 import com.example.ecommerce.product.ProductRepository;
@@ -11,6 +12,7 @@ import com.example.ecommerce.user.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
@@ -21,6 +23,7 @@ import java.util.Set;
 @RestController
 @RequestMapping("/api/v1/cart")
 @RequiredArgsConstructor
+@Transactional
 public class CartController {
     private final CartService service;
     private final CartRepository cartRepository;
@@ -28,19 +31,19 @@ public class CartController {
     private final UserService userService;
 
     @PostMapping("/add")
-    public ResponseEntity<?> addItemToCart(@RequestBody CartDto cartDto, Principal user) throws Exception {
-        Product product = repository.findByProductId(cartDto.getProductId());
+    public ResponseEntity<CartResponse> addItemToCart(@RequestBody CartItemDto cartItemDto, Principal user) throws Exception {
+        Product product = repository.findByProductId(cartItemDto.getProductId());
 
         var optionalUser = userService.getCurrentUser(user);
 
-        service.addItemToCart(cartDto, product, optionalUser);
-        return ResponseEntity.ok("cartItemDto");
+
+        return ResponseEntity.ok(service.addItemToCart(cartItemDto, product, optionalUser));
     }
 
-    @GetMapping("/cartItems")
-    public ResponseEntity<List<Cart>> getCartItemsByUser(Principal principalUser) {
+    @GetMapping
+    public ResponseEntity<?> getCartItemsByUser(Principal principalUser) {
         User user = userService.getCurrentUser(principalUser);
-        return ResponseEntity.ok(cartRepository.findAllByUser(user));
+        return ResponseEntity.ok(cartRepository.findByUser(user));
     }
 
     @DeleteMapping("/remove/{cartId}")
@@ -49,7 +52,7 @@ public class CartController {
         return ResponseEntity.ok(cartId);
     }
 
-    @GetMapping
+    @GetMapping("/all")
     public ResponseEntity<List<Cart>> getAllCarts() {
         return ResponseEntity.ok(service.getAll());
     }
