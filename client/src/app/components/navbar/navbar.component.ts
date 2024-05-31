@@ -69,10 +69,10 @@ export class NavbarComponent implements OnInit {
   }
 
   getCartItems() {
-    this.cartService.getCartItems().subscribe({
+    this.cartService.getCart().subscribe({
       next: (data: any) => {
-        this.cartItems = data;
-        this.cartLength = data.length;
+        this.cartItems = data.cartItems;
+        this.cartLength = data.cartItems.length;
         console.log(data);
       },
     });

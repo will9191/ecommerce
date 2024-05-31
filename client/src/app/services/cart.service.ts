@@ -9,9 +9,9 @@ import { apiEndpoint } from '../constants/constants';
 export class CartService {
   constructor(private httpClient: HttpClient) {}
 
-  getCartItems(): Observable<any> {
+  getCart(): Observable<any> {
     return this.httpClient.get<any>(
-      `${apiEndpoint.CartEndpoint.base}/cartItems`
+      `${apiEndpoint.CartEndpoint.base}`
     );
   }
 
