@@ -3,6 +3,7 @@ package com.example.ecommerce.cart;
 import com.example.ecommerce.cartItem.CartItem;
 import lombok.*;
 
+import java.util.List;
 import java.util.Set;
 
 @Data
@@ -11,5 +12,5 @@ import java.util.Set;
 @AllArgsConstructor
 public class CartResponse {
     private Long cartId;
-    private Set<CartItem> cartItems;
+    private List<CartItem> cartItems;
 }

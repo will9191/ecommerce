@@ -19,10 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import org.modelmapper.ModelMapper;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 @Service
 @Transactional
@@ -33,19 +30,18 @@ public class CartService {
     private final CartItemRepository cartItemRepository;
     private final UserRepository userRepository;
 
-    private ModelMapper modelMapper;
     private ApplicationAuditAware auditAware;
 
     public CartResponse addItemToCart(CartItemDto cartItemDto, Product product, User user) {
-        Cart cart = user.getCart();
+        Cart cart = cartRepository.findByUser(user);
 
         if (cart == null) {
             cart = new Cart();
             cart.setUser(user);
-            cart.setCartItems(new HashSet<>());
+            cart.setCartItems(new ArrayList<>());
         }
 
-        Set<CartItem> cartItemsList = cart.getCartItems();
+        List<CartItem> cartItemsList = cart.getCartItems();
 
         boolean itemAlreadyExists = false;
         for (CartItem existingCart : cartItemsList) {
@@ -53,8 +49,8 @@ public class CartService {
                 Size size = existingCart.getSize();
                 size.setQuantity(existingCart.getSize().getQuantity() + cartItemDto.getSize().getQuantity());
                 existingCart.setSize(size);
-              itemAlreadyExists = true;
-              break;
+                itemAlreadyExists = true;
+                break;
             }
         }
 
@@ -68,9 +64,7 @@ public class CartService {
         }
 
         cart.setCartItems(cartItemsList);
-        user.setCart(cart);
         cartRepository.save(cart);
-        userRepository.save(user);
 
         return CartResponse.builder().cartItems(cartItemsList).cartId(cart.getCartId()).build();
     }

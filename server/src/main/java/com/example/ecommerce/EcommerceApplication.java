@@ -11,6 +11,8 @@ import com.example.ecommerce.product.ProductDto;
 import com.example.ecommerce.product.ProductService;
 import com.example.ecommerce.size.Size;
 import com.example.ecommerce.size.SizeType;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -112,6 +114,10 @@ public class EcommerceApplication {
                     .sizes(sizes)
                     .build();
             productController.save(product3);
+
+            ObjectMapper objectMapper = new ObjectMapper();
+            objectMapper.disable(SerializationFeature.FAIL_ON_EMPTY_BEANS);
+
         };
     }
 }

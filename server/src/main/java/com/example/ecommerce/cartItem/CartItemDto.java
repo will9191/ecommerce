@@ -11,6 +11,5 @@ import lombok.Setter;
 public class CartItemDto {
     private Long productId;
     @Embedded
-    @ElementCollection
     private Size size;
 }

@@ -19,11 +19,11 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class CartItem {
     @Id
-    @GeneratedValue
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long cartItemId;
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Product product;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JsonIgnore
     private Cart cart;
     @Embedded
