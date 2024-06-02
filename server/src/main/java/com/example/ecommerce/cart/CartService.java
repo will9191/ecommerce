@@ -69,8 +69,16 @@ public class CartService {
         return CartResponse.builder().cartItems(cartItemsList).cartId(cart.getCartId()).build();
     }
 
-    public void removeCartItem(Long cartId) {
-        cartRepository.deleteById(cartId);
+    public ResponseEntity<?> removeCartItem(Long cartId, User user) {
+        Cart cart = cartRepository.findByUser(user);
+        Optional<CartItem> cartItem = cartItemRepository.findById(cartId);
+        if (cartItem.isPresent()) {
+            var cartItemExists = cartItem.get();
+            cart.getCartItems().remove(cartItemExists);
+            return ResponseEntity.ok(cartRepository.save(cart));
+        } else {
+            return ResponseEntity.badRequest().build();
+        }
     }
 
 
