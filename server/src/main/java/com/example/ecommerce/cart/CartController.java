@@ -43,7 +43,7 @@ public class CartController {
     @GetMapping
     public ResponseEntity<?> getCartItemsByUser(Principal principalUser) {
         User user = userService.getCurrentUser(principalUser);
-        return ResponseEntity.ok(cartRepository.findByUser(user));
+        return ResponseEntity.ok(service.getCartByUser(user).getBody());
     }
 
     @DeleteMapping("/remove/{cartItemId}")
