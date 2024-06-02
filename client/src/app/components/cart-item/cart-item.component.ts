@@ -13,7 +13,7 @@ import { NavbarComponent } from '../navbar/navbar.component';
 export class CartItemComponent {
   constructor(private cartService: CartService, @Inject(NavbarComponent) private navbar: NavbarComponent) {}
 
-  @Input() cartItems: any;
+  @Input() cart: any;
 
   removeItem(id: number) {
     this.cartService.removeCartItem(id).subscribe({
@@ -29,6 +29,6 @@ export class CartItemComponent {
   }
 
   getCartItems() {
-    return this.navbar.getCartItems();
+    return this.navbar.getCart();
   }
 }

@@ -3,7 +3,7 @@
 >
   <p class="text-center">My Cart</p>
   <div class="absolute text-red-800 cursor-pointer text-7xl flex top-0 left-0" (click)="closeCart()">&times;</div>
-  @for (cartItem of cartItems; track $index) {
+  @for (cartItem of cart.cartItems; track $index) {
   <div class="flex items-center">
     <div>
       <div class="flex items-center">
@@ -20,11 +20,12 @@
     <div>
       <div
         class="bg-red-800 w-5 h-5 text-center rounded-full right-0 float-end text-white"
-        (click)="removeItem(cartItem.cartId)"
+        (click)="removeItem(cartItem.cartItemId)"
       >
         -
       </div>
     </div>
   </div>
   }
+  <div>Total Price: ${{cart.totalPrice}}</div>
 </div>

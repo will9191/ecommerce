@@ -57,7 +57,7 @@ export class NavbarComponent implements OnInit {
   categories: any;
   isOpen: boolean = false;
 
-  cartItems: any;
+  cart: any;
   cartLength: any = 0;
 
   ngOnInit(): void {
@@ -65,13 +65,13 @@ export class NavbarComponent implements OnInit {
       this.isLoggedIn = localStorage.getItem('access_token');
     }
     this.getCategories();
-    this.getCartItems();
+    this.getCart();
   }
 
-  getCartItems() {
+  getCart() {
     this.cartService.getCart().subscribe({
       next: (data: any) => {
-        this.cartItems = data.cartItems;
+        this.cart = data;
         this.cartLength = data.cartItems.length;
         console.log(data);
       },
