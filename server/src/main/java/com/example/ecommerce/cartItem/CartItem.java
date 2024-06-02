@@ -28,4 +28,5 @@ public class CartItem {
     private Cart cart;
     @Embedded
     private Size size;
+    private Double price;
 }

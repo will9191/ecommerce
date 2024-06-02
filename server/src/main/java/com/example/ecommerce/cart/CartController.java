@@ -31,13 +31,13 @@ public class CartController {
     private final UserService userService;
 
     @PostMapping("/add")
-    public ResponseEntity<CartResponse> addItemToCart(@RequestBody CartItemDto cartItemDto, Principal user) throws Exception {
+    public ResponseEntity<CartResponse> addItemToCart(@RequestBody CartItemDto cartItemDto, Principal principalUser) throws Exception {
         Product product = repository.findByProductId(cartItemDto.getProductId());
 
-        var optionalUser = userService.getCurrentUser(user);
+        User user = userService.getCurrentUser(principalUser);
 
 
-        return ResponseEntity.ok(service.addItemToCart(cartItemDto, product, optionalUser));
+        return ResponseEntity.ok(service.addItemToCart(cartItemDto, product, user));
     }
 
     @GetMapping

@@ -59,10 +59,13 @@ public class CartService {
             cartItem.setProduct(product);
             cartItem.setSize(cartItemDto.getSize());
             cartItem.setCart(cart);
+            cartItem.setPrice(product.getPrice());
             cartItemRepository.save(cartItem);
             cartItemsList.add(cartItem);
         }
 
+        var cartTotalPrice = this.getTotalPrice(cartItemsList);
+        cart.setTotalPrice(cartTotalPrice);
         cart.setCartItems(cartItemsList);
         cartRepository.save(cart);
 
@@ -98,6 +101,16 @@ public class CartService {
 //
 //        return cartDto;
 //    }
+
+    public Double getTotalPrice(List<CartItem> cartItems) {
+        var totalPrice = 0.0;
+        for (CartItem cartItem : cartItems) {
+            var quantity = cartItem.getSize().getQuantity();
+
+            totalPrice += cartItem.getPrice() * quantity;
+        }
+        return totalPrice;
+    }
 
     public List<Cart> getAll() {
         return cartRepository.findAll();
