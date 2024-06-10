@@ -8,7 +8,7 @@ import { RouterModule } from '@angular/router';
   standalone: true,
   imports: [CommonModule, RouterModule],
   templateUrl: './category-products.component.html',
-  styleUrl: './category-products.component.css',
+  styleUrl: './category-products.component.scss',
 })
 export class CategoryProductsComponent implements OnChanges {
   constructor(private categoryService: CategoryService) {}

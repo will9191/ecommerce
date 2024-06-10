@@ -1,46 +1,53 @@
-<nav id="navbar" class="navbar fixed w-full top-0 z-40 bg-white">
-  <div class="items-center grid grid-cols-3 w-full justify-center my-4">
-    <div class="flex justify-center">
-      <ng-icon name="matSearchOutline" />
-    </div>
-    <div class="flex flex-col text-center cursor-pointer" routerLink="">
-      W <span>Clothing</span>
-    </div>
-    <div class="space-x-4 flex justify-center items-center">
-      <ng-icon
-        routerLink="admin/dashboard"
-        *ngIf="isLoggedIn"
-        class="cursor-pointer"
-        name="matDashboardOutline"
-      />
-      <div class="relative flex p-1.5" (click)="openCart()">
-        <div
-          class="absolute top-0 right-0 bg-red-800 text-white w-3.5 h-3.5 rounded-full text-xs items-center justify-center flex"
-        >
-          {{ cartLength }}
-        </div>
-        <ng-icon class="cursor-pointer" name="matShoppingCartOutline" />
+<div class="min-h-screen flex flex-col">
+  <nav id="navbar" class="navbar w-full pb-5 top-0 z-40 bg-white">
+    <div class="items-center grid grid-cols-3 w-full justify-center my-4">
+      <div class="flex justify-center">
+        <ng-icon name="matSearchOutline" />
       </div>
-      <ng-icon
-        routerLink="user"
-        name="matPersonOutline"
+      <div class="flex flex-col text-center cursor-pointer" routerLink="">
+        W <span>Clothing</span>
+      </div>
+      <div class="space-x-4 flex justify-center items-center">
+        <ng-icon
+          routerLink="admin/dashboard"
+          *ngIf="isLoggedIn"
+          class="cursor-pointer"
+          name="matDashboardOutline"
+        />
+        <div class="relative flex p-1.5" (click)="openCart()">
+          <div
+            class="absolute top-0 right-0 bg-red-800 text-white w-3.5 h-3.5 rounded-full text-xs items-center justify-center flex"
+          >
+            {{ cartLength }}
+          </div>
+          <ng-icon class="cursor-pointer" name="matShoppingCartOutline" />
+        </div>
+        <ng-icon
+          routerLink="user"
+          name="matPersonOutline"
+          class="cursor-pointer"
+        ></ng-icon>
+        <ng-icon class="cursor-pointer" name="matInfoOutline" />
+      </div>
+    </div>
+    <div class="flex space-x-10 items-center justify-center">
+      @for (category of categories; track $index) {
+      <div
         class="cursor-pointer"
-      ></ng-icon>
-      <ng-icon class="cursor-pointer" name="matInfoOutline" />
+        routerLink="{{ category.referenceName }}/products"
+      >
+        {{ category.name }}
+      </div>
+      }
     </div>
+  </nav>
+  <app-cart-item [cart]="cart" *ngIf="isOpen"></app-cart-item>
+  <div id="mainContainer" class="">
+    <router-outlet></router-outlet>
   </div>
-  <div class="flex space-x-10 items-center justify-center">
-    @for (category of categories; track $index) {
-    <div
-      class="cursor-pointer"
-      routerLink="{{ category.referenceName }}/products"
-    >
-      {{ category.name }}
+  <footer class="bg-secondary mt-auto bottom-0 right-0 left-0">
+    <div class="text-white text-center p-10">
+      Copyright W Clothing - 2024. Todos os direitos reservados.
     </div>
-    }
-  </div>
-</nav>
-<app-cart-item [cart]="cart" *ngIf="isOpen"></app-cart-item>
-<div id="mainContainer">
-  <router-outlet></router-outlet>
+  </footer>
 </div>

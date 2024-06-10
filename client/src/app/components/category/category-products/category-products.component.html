@@ -1,5 +1,5 @@
 @defer (when products) {
-<div class="h-screen flex items-center">
+<div class="flex items-center">
   <div class="grid grid-cols-3 w-full justify-center items-center text-center">
     @for (product of products; track $index) {
     <div class="" [routerLink]="['/product', product.productId]">
