@@ -61,7 +61,7 @@ public class EcommerceApplication {
 
             var category2 = CategoryDto.builder()
                     .name("Drop Y")
-                    .referenceName("drop-Y")
+                    .referenceName("drop-y")
                     .description("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sit amet mattis vulputate enim nulla aliquet porttitor. Accumsan.")
                     .imageUrl("https://pbs.twimg.com/media/EYHAwfjXkAA0MXb.jpg:large")
                     .build();
@@ -69,7 +69,7 @@ public class EcommerceApplication {
 
             var category3 = CategoryDto.builder()
                     .name("Drop Z")
-                    .referenceName("drop-z ")
+                    .referenceName("drop-z")
                     .description("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sit amet mattis vulputate enim nulla aliquet porttitor. Accumsan.")
                     .imageUrl("https://pbs.twimg.com/media/EYHAwfjXkAA0MXb.jpg:large")
                     .build();
