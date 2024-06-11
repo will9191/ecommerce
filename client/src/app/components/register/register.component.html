@@ -1,1 +1,62 @@
-<p>register works!</p>
+<div class="p-10">
+  <p class="flex flex-col text-center static m-auto left-0 right-0 text-2xl">
+    W <span>Clothing</span>
+  </p>
+
+  <form
+    [formGroup]="registerForm"
+    class="mt-10 text-center flex flex-col justify-center self-center items-center"
+  >
+    <p class="text-2xl">Enter your email to join us or sign in.</p>
+    <mat-form-field appearance="outline" class="w-1/5">
+      <mat-label class="text-primary font-primary">First Name</mat-label>
+      <input
+        formControlName="firstName"
+        type="firstName"
+        matInput
+        placeholder=""
+        class="focus:text-primary focus:border-l-pink-600"
+      />
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="w-1/5">
+      <mat-label class="text-primary font-primary">Last Name</mat-label>
+      <input
+        formControlName="lastName"
+        type="lastName"
+        matInput
+        placeholder=""
+        class="focus:text-primary focus:border-l-pink-600"
+      />
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="w-1/5">
+      <mat-label class="text-primary font-primary">Email</mat-label>
+      <input
+        formControlName="email"
+        type="email"
+        matInput
+        placeholder=""
+        class="focus:text-primary focus:border-l-pink-600"
+      />
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="w-1/5">
+      <mat-label class="text-primary font-primary">Password</mat-label>
+      <input
+        formControlName="password"
+        matInput
+        placeholder=""
+        class="focus:text-primary focus:border-l-pink-600"
+      />
+    </mat-form-field>
+    <button
+      (click)="submit()"
+      class="mt-10 bg-gray-100 shadow-sm text-primary font-primary w-1/5 text-2xl"
+      type="submit"
+    >
+      Continue
+    </button>
+  </form>
+  <div class="text-center mt-10">
+    <div>Already have an account?</div>
+    <div routerLink="/login" class="">Login</div>
+  </div>
+</div>

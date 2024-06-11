@@ -8,6 +8,8 @@ import { MatInputModule } from '@angular/material/input';
 import { CartService } from '../../services/cart.service';
 import { ToastrService } from 'ngx-toastr';
 import { NavbarComponent } from '../navbar/navbar.component';
+import { Router } from '@angular/router';
+import { LoginService } from '../../services/login.service';
 
 @Component({
   selector: 'app-product',
@@ -21,7 +23,9 @@ export class ProductComponent implements OnInit {
     private productService: ProductService,
     private cartService: CartService,
     private toastrService: ToastrService,
-    @Inject(NavbarComponent) private navbar: NavbarComponent
+    private router: Router,
+    @Inject(NavbarComponent) private navbar: NavbarComponent,
+    @Inject(LoginService) private auth: LoginService
   ) {}
 
   @Input() id: number = 0;
@@ -54,18 +58,23 @@ export class ProductComponent implements OnInit {
   }
 
   submit() {
-    if (this.sizeName) {
-      console.log(this.id);
-      console.log(this.size);
-      console.log(this.quantity);
-      console.log(this.data);
-      this.cartService.addToCart(this.data).subscribe({
-        next: () => this.toastrService.success('Successfully added!'),
-        error: () => this.toastrService.error('Error!'),
-      });
-      window.location.reload();
+    const authToken = this.auth.getAuthToken();
+    if (authToken) {
+      if (this.sizeName) {
+        console.log(this.id);
+        console.log(this.size);
+        console.log(this.quantity);
+        console.log(this.data);
+        this.cartService.addToCart(this.data).subscribe({
+          next: () => this.toastrService.success('Successfully added!'),
+          error: () => this.router.navigate(['']),
+        });
+        window.location.reload();
+      } else {
+        this.toastrService.error('You should add one size!');
+      }
     } else {
-      this.toastrService.error('You should add one size!');
+      this.router.navigate(['/login']);
     }
   }
 

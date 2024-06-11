@@ -1,9 +1,10 @@
-export const API_URL = "http://localhost:8080";
+export const API_URL = 'http://localhost:8080';
 
 export const apiEndpoint = {
   AuthEndpoint: {
     authenticate: `${API_URL}/api/v1/auth/authenticate`,
-    register: `${API_URL}/api/v1/auth/register`
+    register: `${API_URL}/api/v1/auth/register`,
+    logout: `${API_URL}/api/v1/auth/logout`,
   },
   ProductEndpoint: {
     base: `${API_URL}/api/v1/product`,
@@ -16,6 +17,6 @@ export const apiEndpoint = {
   CartEndpoint: {
     base: `${API_URL}/api/v1/cart`,
     remove: `${API_URL}/api/v1/cart/remove`,
-    add: `${API_URL}/api/v1/cart/add`
-  }
-}
+    add: `${API_URL}/api/v1/cart/add`,
+  },
+};

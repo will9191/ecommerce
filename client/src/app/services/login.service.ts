@@ -31,10 +31,38 @@ export class LoginService {
       );
   }
 
+  register(
+    firstName: string,
+    lastName: string,
+    email: string,
+    password: string
+  ) {
+    return this.httpClient
+      .post<LoginResponse>(`${apiEndpoint.AuthEndpoint.register}`, {
+        firstName,
+        lastName,
+        email,
+        password,
+      })
+      .pipe(
+        tap((value) => {
+          if (isPlatformBrowser(this.platformId)) {
+            localStorage.setItem('access_token', value.access_token),
+              localStorage.setItem('refresh_token', value.refresh_token);
+            this.getAuthToken();
+          }
+        })
+      );
+  }
+
   getAuthToken(): any {
     if (isPlatformBrowser(this.platformId)) {
       console.log(localStorage.getItem('access_token'));
       return localStorage.getItem('access_token');
     }
+  }
+
+  logout(): any {
+    return this.httpClient.get<any>(`${apiEndpoint.AuthEndpoint.logout}`);
   }
 }

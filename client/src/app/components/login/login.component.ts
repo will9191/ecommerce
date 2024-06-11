@@ -9,7 +9,7 @@ import {
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { LoginService } from '../../services/login.service';
 import { ToastrService } from 'ngx-toastr';
 
@@ -27,6 +27,7 @@ interface LoginForm {
     MatIconModule,
     CommonModule,
     ReactiveFormsModule,
+    RouterModule
   ],
   providers: [LoginService],
   templateUrl: './login.component.html',
@@ -53,9 +54,5 @@ export class LoginComponent {
         next: () => this.router.navigate(['/']),
         error: () => this.toastrService.error('Error on login!'),
       });
-  }
-
-  navigate() {
-    this.router.navigate(['register']);
   }
 }

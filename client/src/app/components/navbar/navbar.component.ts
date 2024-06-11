@@ -10,7 +10,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
-import { RouterLink, RouterModule } from '@angular/router';
+import { Router, RouterLink, RouterModule } from '@angular/router';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import {
   matShoppingCartOutline,
@@ -18,10 +18,14 @@ import {
   matInfoOutline,
   matSearchOutline,
   matDashboardOutline,
+  matLogoutOutline,
+  matSettingsOutline,
 } from '@ng-icons/material-icons/outline';
 import { CategoryService } from '../../services/category.service';
 import { CartService } from '../../services/cart.service';
 import { CartItemComponent } from '../cart-item/cart-item.component';
+import { LoginService } from '../../services/login.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-navbar',
@@ -41,6 +45,8 @@ import { CartItemComponent } from '../cart-item/cart-item.component';
       matInfoOutline,
       matSearchOutline,
       matDashboardOutline,
+      matLogoutOutline,
+      matSettingsOutline,
     }),
   ],
   templateUrl: './navbar.component.html',
@@ -50,12 +56,16 @@ export class NavbarComponent implements OnInit {
   constructor(
     @Inject(PLATFORM_ID) private platformId: Object,
     private categoryService: CategoryService,
-    private cartService: CartService
+    private cartService: CartService,
+    private loginService: LoginService,
+    private toastrService: ToastrService,
+    private router: Router
   ) {}
 
   isLoggedIn: any;
   categories: any;
   isOpen: boolean = false;
+  menuOpen: boolean = false;
 
   cart: any;
   cartLength: any = 0;
@@ -86,6 +96,19 @@ export class NavbarComponent implements OnInit {
     this.categoryService.getAll().subscribe({
       next: (data: any) => {
         this.categories = data;
+      },
+    });
+  }
+
+  setMenuOpen() {
+    this.menuOpen = !this.menuOpen;
+  }
+
+  logout() {
+    this.loginService.logout().subscribe({
+      next: () => {
+        this.toastrService.success('Logged Out!');
+        this.router.navigate(['/login']);
       },
     });
   }
