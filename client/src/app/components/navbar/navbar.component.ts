@@ -89,7 +89,11 @@ export class NavbarComponent implements OnInit {
   }
 
   openCart() {
-    this.isOpen = !this.isOpen;
+    if (this.loginService.getAuthToken()) {
+      this.isOpen = !this.isOpen;
+    } else {
+      this.router.navigate(['/login']);
+    }
   }
 
   getCategories() {
@@ -101,7 +105,11 @@ export class NavbarComponent implements OnInit {
   }
 
   setMenuOpen() {
-    this.menuOpen = !this.menuOpen;
+    if (this.loginService.getAuthToken()) {
+      this.menuOpen = !this.menuOpen;
+    } else {
+      this.router.navigate(['/login']);
+    }
   }
 
   logout() {
