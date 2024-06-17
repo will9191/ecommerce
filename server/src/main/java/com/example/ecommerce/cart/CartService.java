@@ -82,6 +82,32 @@ public class CartService {
         }
     }
 
+    public ResponseEntity<?> removeQuantity(Long cartId, User user) {
+        Cart cart = cartRepository.findByUser(user);
+        CartItem cartItem = cartItemRepository.findById(cartId).orElse(null);
+
+        assert cartItem != null;
+        Size size = cartItem.getSize();
+
+        if (size.getQuantity() == 1) {
+            cart.getCartItems().remove(cartItem);
+        } else {
+            size.setQuantity(size.getQuantity() - 1);
+            cartItem.setSize(size);
+        }
+        return ResponseEntity.ok(cartRepository.save(cart));
+    }
+
+    public ResponseEntity<?> addQuantity(Long cartId, User user) {
+        Cart cart = cartRepository.findByUser(user);
+        CartItem cartItem = cartItemRepository.findById(cartId).orElse(null);
+        assert cartItem != null;
+        Size size = cartItem.getSize();
+        size.setQuantity(size.getQuantity() + 1);
+        cartItem.setSize(size);
+        return ResponseEntity.ok(cartRepository.save(cart));
+    }
+
     public ResponseEntity<?> getCartByUser(User user) {
         Cart cart = cartRepository.findByUser(user);
         double totalPrice = 0.0;
