@@ -23,6 +23,24 @@ export class CartItemComponent {
       },
     });
   }
+  
+  removeQuantity(id: number) {
+    this.cartService.removeQuantity(id).subscribe({
+      next: (data: any) => {
+        console.log(data);
+        this.getCartItems();
+      },
+    });
+  }
+  
+  addQuantity(id: number) {
+    this.cartService.addQuantity(id).subscribe({
+      next: (data: any) => {
+        console.log(data);
+        this.getCartItems();
+      },
+    });
+  }
 
   closeCart() {
     this.navbar.openCart();

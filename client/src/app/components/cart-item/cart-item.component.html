@@ -1,31 +1,66 @@
 <div
-  class="fixed p-10 items-center z-50 min-w-52 top-0 right-0 bottom-0 bg-white shadow-xl"
+  class="fixed pb-10 px-10 pt-3 items-center z-50 top-0 right-0 bottom-0 bg-white shadow-xl flex flex-col"
 >
-  <p class="text-center">My Cart</p>
-  <div class="absolute text-red-800 cursor-pointer text-7xl flex top-0 left-0" (click)="closeCart()">&times;</div>
-  @for (cartItem of cart.cartItems; track $index) {
-  <div class="flex items-center">
-    <div>
-      <div class="flex items-center">
-        <img class="w-10 h-10" src="{{ cartItem.product.image }}" alt="" />
-        <div>{{ cartItem.product.name }}</div>
+  <p class="text-center border-b border-0 border-solid border-black text-2xl">
+    My Cart
+  </p>
+  <div
+    class="absolute text-red-800 cursor-pointer text-7xl flex top-0 left-0"
+    (click)="closeCart()"
+  >
+    &times;
+  </div>
+  <div class="max-h-max overflow-auto">
+    @for (cartItem of cart.cartItems; track $index) {
+    <div class="flex border-b border-0 border-b-black border-solid gap-5 p-2">
+      <div>
+        <div class="flex items-center">
+          <img class="w-10 h-10" src="{{ cartItem.product.image }}" alt="" />
+          <div>{{ cartItem.product.name }}</div>
+        </div>
+        <div class="flex gap-5">
+          <div>Size: {{ cartItem.size.name }}</div>
+          |
+          <div class="flex flex-col justify-center items-center">
+            Quantity: {{ cartItem.size.quantity }}
+            <div class="flex gap-2">
+              <div
+                class="bg-red-800 w-5 h-5 text-center rounded-full text-white"
+                (click)="removeQuantity(cartItem.cartItemId)"
+              >
+                -
+              </div>
+              <div
+                class="bg-green-700 w-5 h-5 text-center rounded-full text-white"
+                (click)="addQuantity(cartItem.cartItemId)"
+              >
+                +
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>Price: $ {{ cartItem.price }}</div>
       </div>
-      <div class="flex gap-5">
-        <div>Size: {{ cartItem.size.name }}</div>
-        |
-        <div>Quantity: {{ cartItem.size.quantity }}</div>
+
+      <div class="items-center">
+        <div
+          class="bg-red-800 p-3 w-2 h-2 text-center rounded-full right-0 float-end text-white items-center flex justify-center"
+          (click)="removeItem(cartItem.cartItemId)"
+        >
+          x
+        </div>
       </div>
-      $ {{ cartItem.price }}
     </div>
-    <div>
-      <div
-        class="bg-red-800 w-5 h-5 text-center rounded-full right-0 float-end text-white"
-        (click)="removeItem(cartItem.cartItemId)"
-      >
-        -
-      </div>
+    }
+  </div>
+  <div
+    class="bottom-5 mt-auto left-0 right-0 gap-10 flex flex-col w-full text-center pt-8"
+  >
+    <div class="">Total Price: ${{ cart.totalPrice }}</div>
+    <div
+      class="bg-green-700 text-center rounded-full w-full bottom-0 text-white"
+    >
+      Order
     </div>
   </div>
-  }
-  <div>Total Price: ${{cart.totalPrice}}</div>
 </div>

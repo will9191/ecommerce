@@ -18,5 +18,7 @@ export const apiEndpoint = {
     base: `${API_URL}/api/v1/cart`,
     remove: `${API_URL}/api/v1/cart/remove`,
     add: `${API_URL}/api/v1/cart/add`,
+    removeQuantity: `${API_URL}/api/v1/cart/removeQuantity`,
+    addQuantity: `${API_URL}/api/v1/cart/addQuantity`,
   },
 };
