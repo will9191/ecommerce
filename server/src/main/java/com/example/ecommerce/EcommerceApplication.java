@@ -115,6 +115,66 @@ public class EcommerceApplication {
                     .build();
             productController.save(product3);
 
+            var product4 = ProductDto.builder()
+                    .name("Tupac")
+                    .description("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sit amet mattis vulputate enim nulla aliquet porttitor. Accumsan.")
+                    .image("https://ae01.alicdn.com/kf/H82ac43e81b5149239d21a19ed7d825c9t.jpg?width=1500&height=1500&hash=3000")
+                    .price(299)
+                    .categoryId(2L)
+                    .sizes(sizes)
+                    .build();
+            productController.save(product4);
+
+            var product5 = ProductDto.builder()
+                    .name("Kobe Bryant")
+                    .description("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sit amet mattis vulputate enim nulla aliquet porttitor. Accumsan.")
+                    .image("https://www.cretineoficial.com/cdn/shop/files/421C820D-76F9-452D-B971-2AA09C64C866_1024x1024@2x.jpg?v=1695848725")
+                    .price(299)
+                    .categoryId(2L)
+                    .sizes(sizes)
+                    .build();
+            productController.save(product5);
+
+            var product6 = ProductDto.builder()
+                    .name("Rodman")
+                    .description("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sit amet mattis vulputate enim nulla aliquet porttitor. Accumsan.")
+                    .image("https://www.cretineoficial.com/cdn/shop/products/S15ccfecef1ef405d832bf1bdbb86d8e4T_1024x1024@2x.jpg?v=1686082152")
+                    .price(299)
+                    .categoryId(2L)
+                    .sizes(sizes)
+                    .build();
+            productController.save(product6);
+
+            var product7 = ProductDto.builder()
+                    .name("Michael Jordan")
+                    .description("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sit amet mattis vulputate enim nulla aliquet porttitor. Accumsan.")
+                    .image("https://www.cretineoficial.com/cdn/shop/files/IMG-9290_1024x1024@2x.jpg?v=1702933282")
+                    .price(299)
+                    .categoryId(3L)
+                    .sizes(sizes)
+                    .build();
+            productController.save(product7);
+
+            var product8 = ProductDto.builder()
+                    .name("Post Malone")
+                    .description("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sit amet mattis vulputate enim nulla aliquet porttitor. Accumsan.")
+                    .image("https://www.cretineoficial.com/cdn/shop/files/IMG-9324_1024x1024@2x.jpg?v=1702966278")
+                    .price(299)
+                    .categoryId(3L)
+                    .sizes(sizes)
+                    .build();
+            productController.save(product8);
+
+            var product9 = ProductDto.builder()
+                    .name("Kurt Kobain")
+                    .description("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sit amet mattis vulputate enim nulla aliquet porttitor. Accumsan.")
+                    .image("https://www.cretineoficial.com/cdn/shop/files/IMG-9285_1024x1024@2x.jpg?v=1702932497")
+                    .price(299)
+                    .categoryId(3L)
+                    .sizes(sizes)
+                    .build();
+            productController.save(product9);
+
             ObjectMapper objectMapper = new ObjectMapper();
             objectMapper.disable(SerializationFeature.FAIL_ON_EMPTY_BEANS);
 

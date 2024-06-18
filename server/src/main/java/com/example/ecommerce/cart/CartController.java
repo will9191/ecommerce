@@ -46,15 +46,15 @@ public class CartController {
         return ResponseEntity.ok(service.getCartByUser(user).getBody());
     }
 
-    @PostMapping("/removeQuantity/{cartItemId}")
-    public ResponseEntity<?> removeQuantity(@PathVariable Long cartItemId, Principal principalUser) {
+    @PostMapping("/removeQuantity")
+    public ResponseEntity<?> removeQuantity(@RequestBody Long cartItemId, Principal principalUser) {
         User user = userService.getCurrentUser(principalUser);
         service.removeQuantity(cartItemId, user);
         return ResponseEntity.ok(cartItemId);
     }
 
-    @PostMapping("/addQuantity/{cartItemId}")
-    public ResponseEntity<?> addQuantity(@PathVariable Long cartItemId, Principal principalUser) {
+    @PostMapping("/addQuantity")
+    public ResponseEntity<?> addQuantity(@RequestBody Long cartItemId, Principal principalUser) {
         var user = userService.getCurrentUser(principalUser);
         service.addQuantity(cartItemId, user);
         return ResponseEntity.ok(cartItemId);

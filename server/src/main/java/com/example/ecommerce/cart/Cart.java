@@ -33,6 +33,7 @@ public class Cart {
     private User user;
 
     @OneToMany(mappedBy = "cart", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+    @OrderColumn
 //    @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
     private List<CartItem> cartItems;
 
