@@ -1,5 +1,5 @@
 <div
-  class="fixed pb-10 px-10 pt-3 items-center z-50 top-0 right-0 bottom-0 bg-white shadow-xl flex flex-col"
+  class="fixed pb-10 px-10 pt-3 items-center z-50 top-0 right-0 bottom-0 min-w-64 bg-white shadow-xl flex flex-col"
 >
   <p class="text-center border-b border-0 border-solid border-black text-2xl">
     My Cart
@@ -11,7 +11,7 @@
     &times;
   </div>
   <div class="max-h-max overflow-auto">
-    @for (cartItem of cart.cartItems; track $index) {
+    @for (cartItem of cart.cartItems; track cart.cartItems.cartItemId) {
     <div class="flex border-b border-0 border-b-black border-solid gap-5 p-2">
       <div>
         <div class="flex items-center">

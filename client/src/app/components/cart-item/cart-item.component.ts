@@ -1,4 +1,11 @@
-import { Component, Inject, inject, Input, OnChanges, OnInit } from '@angular/core';
+import {
+  Component,
+  Inject,
+  inject,
+  Input,
+  OnChanges,
+  OnInit,
+} from '@angular/core';
 import { CartService } from '../../services/cart.service';
 import { CommonModule } from '@angular/common';
 import { NavbarComponent } from '../navbar/navbar.component';
@@ -11,7 +18,10 @@ import { NavbarComponent } from '../navbar/navbar.component';
   styleUrl: './cart-item.component.scss',
 })
 export class CartItemComponent {
-  constructor(private cartService: CartService, @Inject(NavbarComponent) private navbar: NavbarComponent) {}
+  constructor(
+    private cartService: CartService,
+    @Inject(NavbarComponent) private navbar: NavbarComponent
+  ) {}
 
   @Input() cart: any;
 
@@ -23,7 +33,7 @@ export class CartItemComponent {
       },
     });
   }
-  
+
   removeQuantity(id: number) {
     this.cartService.removeQuantity(id).subscribe({
       next: (data: any) => {
@@ -32,7 +42,7 @@ export class CartItemComponent {
       },
     });
   }
-  
+
   addQuantity(id: number) {
     this.cartService.addQuantity(id).subscribe({
       next: (data: any) => {
@@ -48,5 +58,9 @@ export class CartItemComponent {
 
   getCartItems() {
     return this.navbar.getCart();
+  }
+
+  trackById(index: number, cart: any): number {
+    return cart.cartItems.cartItemId;
   }
 }

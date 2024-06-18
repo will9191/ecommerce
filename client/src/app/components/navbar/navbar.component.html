@@ -1,4 +1,4 @@
-<div class="min-h-screen flex flex-col">
+<div class="min-h-screen flex flex-col z-50">
   <nav id="navbar" class="navbar w-full pb-5 top-0 z-40 bg-white">
     <div class="items-center grid grid-cols-3 w-full justify-center my-4">
       <div class="flex justify-center">
@@ -30,12 +30,12 @@
           ></ng-icon>
           <ul
             *ngIf="menuOpen"
-            class="absolute list-none shadow-xl p-5 gap-5 z-50 flex flex-col m-0 mt-5"
+            class="absolute list-none shadow-xl p-5 gap-5 z-40  flex flex-col m-0 mt-5"
           >
-            <li class="flex gap-2 border-b-4 cursor-pointer" routerLink="/user">
+            <li class="flex gap-2 border-b-4 cursor-pointer" routerLink="/user" (click)="setMenuOpen()">
               <ng-icon name="matSettingsOutline"></ng-icon>Profile
             </li>
-            <li class="flex gap-2 cursor-pointer" (click)="logout()">
+            <li class="flex gap-2 cursor-pointer" (click)="logout()" (click)="setMenuOpen()">
               <ng-icon name="matLogoutOutline"></ng-icon>Logout
             </li>
           </ul>

@@ -59,7 +59,8 @@ export class NavbarComponent implements OnInit {
     private cartService: CartService,
     private loginService: LoginService,
     private toastrService: ToastrService,
-    private router: Router
+    private router: Router,
+    
   ) {}
 
   isLoggedIn: any;
