@@ -40,8 +40,8 @@ public class User implements UserDetails {
     @JsonIgnoreProperties({"user"})
     private Cart cart;
 
-//    @OneToMany
-//    private Set<Order> orders;
+    @OneToMany
+    private Set<Order> orders;
 
 
     @OneToMany(mappedBy = "user")
