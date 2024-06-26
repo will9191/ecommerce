@@ -26,6 +26,7 @@ import { CartService } from '../../services/cart.service';
 import { CartItemComponent } from '../cart-item/cart-item.component';
 import { LoginService } from '../../services/login.service';
 import { ToastrService } from 'ngx-toastr';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-navbar',
@@ -37,6 +38,7 @@ import { ToastrService } from 'ngx-toastr';
     CommonModule,
     RouterModule,
     CartItemComponent,
+    MatDialogModule
   ],
   viewProviders: [
     provideIcons({
@@ -60,7 +62,7 @@ export class NavbarComponent implements OnInit {
     private loginService: LoginService,
     private toastrService: ToastrService,
     private router: Router,
-    
+    private matDialog: MatDialog
   ) {}
 
   isLoggedIn: any;
@@ -91,7 +93,7 @@ export class NavbarComponent implements OnInit {
 
   openCart() {
     if (this.loginService.getAuthToken()) {
-      this.isOpen = !this.isOpen;
+      this.matDialog.open(CartItemComponent, { disableClose: true });
     } else {
       this.router.navigate(['/login']);
     }
