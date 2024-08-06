@@ -16,7 +16,7 @@ import java.util.List;
 public class Category {
     @Id
     @GeneratedValue
-    private Long categoryId;
+    private Long id;
     private String name;
     private String referenceName;
     private String description;

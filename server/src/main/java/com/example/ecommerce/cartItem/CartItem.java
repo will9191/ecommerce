@@ -20,7 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class CartItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long cartItemId;
+    private Long id;
     @ManyToOne(fetch = FetchType.EAGER)
     private Product product;
     @ManyToOne(fetch = FetchType.EAGER)

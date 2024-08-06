@@ -26,10 +26,11 @@ import java.util.Set;
 public class Cart {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long cartId;
+    private Long id;
 
     @OneToOne(fetch = FetchType.EAGER)
     @JsonIgnoreProperties({"tokens", "password", "authorities"})
+    @JoinColumn(name = "user_id")
     private User user;
 
     @OneToMany(mappedBy = "cart", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)

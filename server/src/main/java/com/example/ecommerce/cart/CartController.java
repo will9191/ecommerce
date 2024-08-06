@@ -32,12 +32,15 @@ public class CartController {
 
     @PostMapping("/add")
     public ResponseEntity<CartResponse> addItemToCart(@RequestBody CartItemDto cartItemDto, Principal principalUser) throws Exception {
-        Product product = repository.findByProductId(cartItemDto.getProductId());
+        Optional<Product> product = repository.findById(cartItemDto.getProductId());
+        if(product.isEmpty()){
+            throw new Exception();
+        }
 
         User user = userService.getCurrentUser(principalUser);
 
 
-        return ResponseEntity.ok(service.addItemToCart(cartItemDto, product, user));
+        return ResponseEntity.ok(service.addItemToCart(cartItemDto, product.get(), user));
     }
 
     @GetMapping

@@ -6,7 +6,12 @@ import com.example.ecommerce.cartItem.CartItem;
 import com.example.ecommerce.cartItem.CartItemRepository;
 import com.example.ecommerce.orderItem.OrderItem;
 import com.example.ecommerce.orderItem.OrderItemRepository;
+import com.example.ecommerce.payment.Payment;
+import com.example.ecommerce.payment.PaymentDto;
+import com.example.ecommerce.payment.PaymentRepository;
+import com.example.ecommerce.payment.PaymentStatus;
 import com.example.ecommerce.user.User;
+import com.example.ecommerce.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -14,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -23,6 +29,8 @@ public class OrderService {
     private final CartItemRepository cartItemRepository;
     private final OrderItemRepository orderItemRepository;
 private final CartRepository cartRepository;
+private final PaymentRepository paymentRepository;
+private final UserRepository userRepository;
     public void saveOrder(OrderDto orderDto, User user) {
         Order order = new Order();
         order.setOrderItems(new ArrayList<>());
@@ -46,14 +54,37 @@ private final CartRepository cartRepository;
             orderItemList.add(orderItem);
             cart.getCartItems().remove(cartItem);
         }
+        Payment payment = new Payment();
+        payment.setAmount(getTotalPrice(orderItemList));
+        payment.setPaymentStatus(PaymentStatus.NOTPAID);
+        payment.setOrder(order);
+        paymentRepository.save(payment);
 
         cartRepository.save(cart);
 
         order.setUser(user);
         order.setOrderItems(orderItemList);
-        order.setOrderStatus("Recebido");
+        order.setOrderStatus(OrderStatus.CREATED);
         order.setOrderPrice(getTotalPrice(orderItemList));
+        order.setPayment(payment);
         repository.save(order);
+    }
+
+    public void payOrder(PaymentDto paymentDto, User user) throws Exception {
+        Optional<Payment> payment = paymentRepository.findById(paymentDto.getPaymentId());
+        if (payment.isEmpty()){
+            throw new Exception();
+        }
+        if (user.getCoins() > payment.get().getAmount()) {
+            payment.get().setPaymentStatus(PaymentStatus.PAID);
+            payment.get().getOrder().setOrderStatus(OrderStatus.PAID);
+            paymentRepository.save(payment.get());
+
+            user.setCoins(user.getCoins()-payment.get().getAmount());
+            userRepository.save(user);
+        } else{
+            throw new Exception("Not enough coins!");
+        }
     }
 
     public List<Order> getOrdersByUser(User user){

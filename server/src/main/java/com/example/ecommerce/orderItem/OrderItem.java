@@ -18,7 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class OrderItem {
     @Id
     @GeneratedValue
-    private Long orderItemId;
+    private Long id;
     @ManyToOne(fetch = FetchType.EAGER)
     @JsonIgnore
     private Order order;

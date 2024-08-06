@@ -1,5 +1,6 @@
 package com.example.ecommerce.order;
 
+import com.example.ecommerce.payment.PaymentDto;
 import com.example.ecommerce.user.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +20,14 @@ public class OrderController {
     public ResponseEntity<?> saveOrder(@RequestBody OrderDto orderDto, Principal user) throws Exception {
         var principalUser = userService.getCurrentUser(user);
         service.saveOrder(orderDto, principalUser);
+
+        return ResponseEntity.ok("ok");
+    }
+
+    @PostMapping("/pay")
+    public ResponseEntity<?> payOrder(@RequestBody PaymentDto paymentDto, Principal user) throws Exception {
+        var principalUser = userService.getCurrentUser(user);
+        service.payOrder(paymentDto, principalUser);
 
         return ResponseEntity.ok("ok");
     }

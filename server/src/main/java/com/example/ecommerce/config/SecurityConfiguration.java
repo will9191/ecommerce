@@ -24,7 +24,8 @@ import static org.springframework.security.config.http.SessionCreationPolicy.STA
 @RequiredArgsConstructor
 @EnableMethodSecurity
 public class SecurityConfiguration {
-    private static final String[] WHERE_LIST_URL = {"/api/v1/auth/**", "/api/v1/cart/**",
+    private static final String[] WHERE_LIST_URL = {"/api/v1/auth/**",
+            "/api/v1/user/**",
             "/api/v1/category/**",
             "/api/v1/product/**",
             "/api/v1/size/**",

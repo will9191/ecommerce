@@ -1,5 +1,6 @@
 package com.example.ecommerce.user;
 
+import com.example.ecommerce.auditing.ApplicationAuditAware;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Service;
@@ -16,11 +17,14 @@ public class UserService {
         var user = (User) ((UsernamePasswordAuthenticationToken) connectedUser).getPrincipal();
 
         return User.builder()
-                .userId(user.getUserId())
+                .id(user.getId())
                 .firstName(user.getFirstName())
                 .lastName(user.getLastName())
                 .email(user.getEmail())
+                .password(user.getPassword())
                 .cart(user.getCart())
+                .coins(user.getCoins())
+                .orders(user.getOrders())
                 .tokens(user.getTokens())
                 .role(user.getRole()).build();
     }
@@ -29,7 +33,7 @@ public class UserService {
         return repository.findAll();
     }
 
-    public Optional<User> findByUsername(String username){
+    public Optional<User> findByUsername(String username) {
         return repository.findByEmail(username);
     }
 

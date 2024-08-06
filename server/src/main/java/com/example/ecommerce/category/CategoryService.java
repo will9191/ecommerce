@@ -29,7 +29,7 @@ public class CategoryService {
         Optional<Category> optionalCategory = repository.findById(request.getCategoryId());
         if (optionalCategory.isPresent()) {
             Category category = optionalCategory.get();
-            category.setCategoryId(request.getCategoryId());
+            category.setId(request.getCategoryId());
             category.setName(request.getName());
             category.setDescription(request.getDescription());
             category.setImageUrl(request.getImageUrl());

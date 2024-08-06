@@ -67,7 +67,7 @@ public class CartService {
         cart.setCartItems(cartItemsList);
         cartRepository.save(cart);
 
-        return CartResponse.builder().cartItems(cartItemsList).cartId(cart.getCartId()).build();
+        return CartResponse.builder().cartItems(cartItemsList).cartId(cart.getId()).build();
     }
 
     public ResponseEntity<?> removeCartItem(Long cartId, User user) {

@@ -34,6 +34,7 @@ public class AuthenticationService {
                 .email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
                 .role(request.getRole())
+                .coins(request.getCoins())
                 .build();
         var savedUser = repository.save(user);
         var jwtToken = jwtService.generateToken(user);
@@ -76,7 +77,7 @@ public class AuthenticationService {
     }
 
     private void revokeAllUserTokens(User user){
-        var validUserTokens = tokenRepository.findAllValidTokenByUser(user.getUserId());
+        var validUserTokens = tokenRepository.findAllValidTokenByUser(user.getId());
         if(validUserTokens.isEmpty())
             return;
         validUserTokens.forEach(token -> {

@@ -23,7 +23,7 @@ import java.util.Set;
 public class Product {
     @Id
     @GeneratedValue
-    private Long productId;
+    private Long id;
     private String name;
     private String image;
     private String description;
