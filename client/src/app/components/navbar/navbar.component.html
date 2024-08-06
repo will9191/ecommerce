@@ -2,6 +2,7 @@
   <nav id="navbar" class="navbar w-full pb-5 top-0 z-40 bg-white">
     <div class="items-center grid grid-cols-3 w-full justify-center my-4">
       <div class="flex justify-center">
+        <ng-icon class="cursor-pointer" name="matInfoOutline" />
         <ng-icon name="matSearchOutline" />
       </div>
       <div class="flex flex-col text-center cursor-pointer" routerLink="">
@@ -22,25 +23,17 @@
           </div>
           <ng-icon class="cursor-pointer" name="matShoppingCartOutline" />
         </div>
-        <div class="relative flex z-50 justify-center">
-          <ng-icon
-            name="matPersonOutline"
-            class="cursor-pointer"
-            (click)="setMenuOpen()"
-          ></ng-icon>
-          <ul
-            *ngIf="menuOpen"
-            class="absolute list-none shadow-xl p-5 gap-5 z-40  flex flex-col m-0 mt-5"
-          >
-            <li class="flex gap-2 border-b-4 cursor-pointer" routerLink="/user" (click)="setMenuOpen()">
-              <ng-icon name="matSettingsOutline"></ng-icon>Profile
-            </li>
-            <li class="flex gap-2 cursor-pointer" (click)="logout()" (click)="setMenuOpen()">
-              <ng-icon name="matLogoutOutline"></ng-icon>Logout
-            </li>
-          </ul>
-        </div>
-        <ng-icon class="cursor-pointer" name="matInfoOutline" />
+
+        <ng-icon
+          name="matPersonOutline"
+          class="cursor-pointer"
+          routerLink="/user"
+        ></ng-icon>
+        <ng-icon
+          *ngIf="isLoggedIn"
+          name="matLogoutOutline"
+          (click)="logout()"
+        ></ng-icon>
       </div>
     </div>
     <div class="flex space-x-10 items-center justify-center">

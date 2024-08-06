@@ -17,6 +17,7 @@ import { DashboardUsersComponent } from './components/dashboard/dashboard-users/
 import { DashboardOrdersComponent } from './components/dashboard/dashboard-orders/dashboard-orders.component';
 import { DashboardSizesComponent } from './components/dashboard/dashboard-sizes/dashboard-sizes.component';
 import { CartItemComponent } from './components/cart-item/cart-item.component';
+import { OrdersComponent } from './components/orders/orders.component';
 
 export const routes: Routes = [
   {
@@ -45,6 +46,12 @@ export const routes: Routes = [
         path: 'user',
         component: UserComponent,
         title: 'User',
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'user/orders',
+        component: OrdersComponent,
+        title: 'Orders',
         canActivate: [AuthGuard],
       },
       {

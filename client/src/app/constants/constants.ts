@@ -22,6 +22,9 @@ export const apiEndpoint = {
     addQuantity: `${API_URL}/api/v1/cart/addQuantity`,
   },
   UserEndpoint: {
-    profile: `${API_URL}/api/v1/user/profile`
-  }
+    profile: `${API_URL}/api/v1/user/profile`,
+  },
+  OrdersEndpoint: {
+    userOrders: `${API_URL}/api/v1/order`,
+  },
 };

@@ -63,6 +63,13 @@ export class LoginService {
   }
 
   logout(): any {
-    return this.httpClient.get<any>(`${apiEndpoint.AuthEndpoint.logout}`);
+    return this.httpClient
+      .get<any>(`${apiEndpoint.AuthEndpoint.logout}`)
+      .subscribe({
+        next: (data: any) => {
+          localStorage.setItem('access_token', ''),
+            localStorage.setItem('refresh_token', '');
+        },
+      });
   }
 }
