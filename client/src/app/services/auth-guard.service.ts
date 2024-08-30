@@ -11,36 +11,22 @@ import {
 } from '@angular/router';
 
 import { Observable } from 'rxjs';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthGuard implements CanActivate {
-  constructor(
-    private router: Router,
-    @Inject(PLATFORM_ID) private platformId: Object
-  ) {}
+  constructor(private router: Router, private authService: AuthService) {}
 
   accessToken: any;
 
-  canActivate(
-    next: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot
-  ):
-    | Observable<boolean | UrlTree>
-    | Promise<boolean | UrlTree>
-    | boolean
-    | UrlTree {
-      
-    if (isPlatformBrowser(this.platformId)) {
-      this.accessToken = localStorage.getItem('access_token');
-    }
-
-    if (isPlatformBrowser(this.platformId) && this.accessToken) {
-      return true;
+  canActivate(): boolean {
+    if (this.authService.isLoggedIn()) {
+      return true; // Permite acesso à rota
     } else {
-      this.router.navigate(['/login']);
-      return false;
+      this.router.navigate(['/login']); // Redireciona para a página de login
+      return false; // Bloqueia acesso à rota
     }
   }
 }

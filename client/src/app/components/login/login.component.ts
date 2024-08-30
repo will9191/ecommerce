@@ -10,8 +10,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { Router, RouterModule } from '@angular/router';
-import { LoginService } from '../../services/login.service';
 import { ToastrService } from 'ngx-toastr';
+import { AuthService } from '../../services/auth.service';
 
 interface LoginForm {
   email: FormControl;
@@ -27,18 +27,17 @@ interface LoginForm {
     MatIconModule,
     CommonModule,
     ReactiveFormsModule,
-    RouterModule
+    RouterModule,
   ],
-  providers: [LoginService],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
 })
 export class LoginComponent {
-  loginForm!: FormGroup<LoginForm>;
+  loginForm: FormGroup<LoginForm>;
 
   constructor(
     private router: Router,
-    private loginService: LoginService,
+    public authService: AuthService,
     private toastrService: ToastrService
   ) {
     this.loginForm = new FormGroup({
@@ -48,10 +47,10 @@ export class LoginComponent {
   }
 
   submit() {
-    this.loginService
+    this.authService
       .login(this.loginForm.value.email, this.loginForm.value.password)
       .subscribe({
-        next: () => this.router.navigate(['/']),
+        // next: () => this.router.navigate(['/']),
         error: () => this.toastrService.error('Error on login!'),
       });
   }

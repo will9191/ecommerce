@@ -9,7 +9,7 @@ import { CartService } from '../../services/cart.service';
 import { ToastrService } from 'ngx-toastr';
 import { NavbarComponent } from '../navbar/navbar.component';
 import { Router } from '@angular/router';
-import { LoginService } from '../../services/login.service';
+
 
 @Component({
   selector: 'app-product',
@@ -25,7 +25,7 @@ export class ProductComponent implements OnInit {
     private toastrService: ToastrService,
     private router: Router,
     @Inject(NavbarComponent) private navbar: NavbarComponent,
-    @Inject(LoginService) private auth: LoginService
+    
   ) {}
 
   @Input() id: number = 0;
@@ -58,8 +58,8 @@ export class ProductComponent implements OnInit {
   }
 
   submit() {
-    const authToken = this.auth.getAuthToken();
-    if (authToken) {
+    // const authToken = this.auth.getAuthToken();
+    // if (authToken) {
       if (this.sizeName) {
         console.log(this.id);
         console.log(this.size);
@@ -73,9 +73,9 @@ export class ProductComponent implements OnInit {
       } else {
         this.toastrService.error('You should add one size!');
       }
-    } else {
-      this.router.navigate(['/login']);
-    }
+    // } else {
+    //   this.router.navigate(['/login']);
+    // }
   }
 
   getProductById() {

@@ -2,17 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url("https://fonts.googleapis.com/css2?family=Rationale&display=swap");
-
+@import url("https://fonts.googleapis.com/css2?family=Coming+Soon&display=swap");
 html,
 body {
   height: 100%;
   margin: 0;
   padding: 0;
-  font-family: "Rationale", sans-serif;
-  font-weight: 400;
-  font-style: normal;
-  font-size: 1.2rem;
+  font-family: "Coming Soon", cursive;
+  font-size: 20px;
 }
 
 button,
@@ -23,6 +20,14 @@ h3,
 h4,
 h5,
 label,
-input {
-  font-family: "Rationale", sans-serif;
+input,
+body {
+  font-family: "Coming Soon", cursive;
+}
+
+
+
+.logo {
+  font-weight: 400;
+  font-size: 1.2rem;
 }

@@ -8,7 +8,7 @@ import { ProductComponent } from './components/product/product.component';
 import { CategoryProductsComponent } from './components/category/category-products/category-products.component';
 import { HomepageComponent } from './pages/homepage/homepage.component';
 import { CarouselComponent } from './components/carousel/carousel.component';
-import { IsAdminGuard } from './services/is-admin-guard.service';
+
 import { DashboardPageComponent } from './pages/dashboard-page/dashboard-page.component';
 import { DashboardLayoutComponent } from './components/dashboard/dashboard-layout/dashboard-layout.component';
 import { DashboardCategoriesComponent } from './components/dashboard/dashboard-categories/dashboard-categories.component';
@@ -18,6 +18,7 @@ import { DashboardOrdersComponent } from './components/dashboard/dashboard-order
 import { DashboardSizesComponent } from './components/dashboard/dashboard-sizes/dashboard-sizes.component';
 import { CartItemComponent } from './components/cart-item/cart-item.component';
 import { OrdersComponent } from './components/orders/orders.component';
+import { AdminGuardService } from './services/admin-guard.service';
 
 export const routes: Routes = [
   {
@@ -66,7 +67,7 @@ export const routes: Routes = [
     path: 'admin/dashboard',
     component: DashboardLayoutComponent,
     title: 'Dashboard',
-    canActivate: [AuthGuard, IsAdminGuard],
+    canActivate: [AuthGuard, AdminGuardService],
     children: [
       {
         path: 'categories',

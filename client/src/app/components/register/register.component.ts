@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
-import { LoginService } from '../../services/login.service';
 import { ToastrService } from 'ngx-toastr';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -12,6 +11,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { AuthService } from '../../services/auth.service';
 
 interface RegisterForm {
   firstName: FormControl;
@@ -39,7 +39,7 @@ export class RegisterComponent {
 
   constructor(
     private router: Router,
-    private loginService: LoginService,
+    private authService: AuthService,
     private toastrService: ToastrService
   ) {
     this.registerForm = new FormGroup({
@@ -51,7 +51,7 @@ export class RegisterComponent {
   }
 
   submit() {
-    this.loginService
+    this.authService
       .register(
         this.registerForm.value.firstName,
         this.registerForm.value.lastName,

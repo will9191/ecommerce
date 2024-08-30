@@ -5,13 +5,13 @@
         <ng-icon class="cursor-pointer" name="matInfoOutline" />
         <ng-icon name="matSearchOutline" />
       </div>
-      <div class="flex flex-col text-center cursor-pointer" routerLink="">
+      <div class="logo flex flex-col text-center cursor-pointer" routerLink="">
         W <span>Clothing</span>
       </div>
       <div class="space-x-4 flex justify-center items-center">
         <ng-icon
           routerLink="admin/dashboard"
-          *ngIf="isLoggedIn"
+          *ngIf="authService.isLoggedIn$ | async"
           class="cursor-pointer"
           name="matDashboardOutline"
         />
@@ -30,7 +30,7 @@
           routerLink="/user"
         ></ng-icon>
         <ng-icon
-          *ngIf="isLoggedIn"
+          *ngIf="authService.isLoggedIn$ | async"
           name="matLogoutOutline"
           (click)="logout()"
         ></ng-icon>

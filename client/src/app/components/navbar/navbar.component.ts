@@ -24,9 +24,9 @@ import {
 import { CategoryService } from '../../services/category.service';
 import { CartService } from '../../services/cart.service';
 import { CartItemComponent } from '../cart-item/cart-item.component';
-import { LoginService } from '../../services/login.service';
 import { ToastrService } from 'ngx-toastr';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-navbar',
@@ -38,7 +38,7 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
     CommonModule,
     RouterModule,
     CartItemComponent,
-    MatDialogModule
+    MatDialogModule,
   ],
   viewProviders: [
     provideIcons({
@@ -56,16 +56,14 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 })
 export class NavbarComponent implements OnInit {
   constructor(
-    @Inject(PLATFORM_ID) private platformId: Object,
     private categoryService: CategoryService,
     private cartService: CartService,
-    private loginService: LoginService,
     private toastrService: ToastrService,
     private router: Router,
-    private matDialog: MatDialog
+    private matDialog: MatDialog,
+    public authService: AuthService
   ) {}
 
-  isLoggedIn: any;
   categories: any;
   isOpen: boolean = false;
   menuOpen: boolean = false;
@@ -74,11 +72,11 @@ export class NavbarComponent implements OnInit {
   cartLength: any = 0;
 
   ngOnInit(): void {
-    if (isPlatformBrowser(this.platformId)) {
-      this.isLoggedIn = localStorage.getItem('access_token');
-    }
     this.getCategories();
     this.getCart();
+    this.authService.isLoggedIn$.subscribe((isLoggedIn) => {
+      console.log('Is logged in:', isLoggedIn);
+    });
   }
 
   getCart() {
@@ -92,7 +90,7 @@ export class NavbarComponent implements OnInit {
   }
 
   openCart() {
-    if (this.loginService.getAuthToken()) {
+    if (this.authService.getAuthToken() != null) {
       this.matDialog.open(CartItemComponent, { disableClose: true });
     } else {
       this.router.navigate(['/login']);
@@ -108,19 +106,20 @@ export class NavbarComponent implements OnInit {
   }
 
   setMenuOpen() {
-    if (this.loginService.getAuthToken()) {
+    if (this.authService.getAuthToken()) {
       this.menuOpen = !this.menuOpen;
     } else {
       this.router.navigate(['/login']);
     }
   }
 
-  logout() {
-    this.loginService.logout().subscribe({
-      next: () => {
-        this.toastrService.success('Logged Out!');
-        this.router.navigate(['/login']);
-      },
-    });
-  }
+  // logout() {
+  //   this.authService.logout().subscribe({
+  //     next: () => {
+  //       this.toastrService.success('Logged Out!');
+  //       this.router.navigate(['/login']);
+  //     },
+  //   });
+  // }
+  logout() {}
 }
