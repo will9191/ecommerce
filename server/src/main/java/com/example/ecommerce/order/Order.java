@@ -27,7 +27,7 @@ public class Order {
     @OneToMany(mappedBy = "order", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<OrderItem> orderItems;
     @ManyToOne(fetch = FetchType.EAGER)
-    @JsonIgnoreProperties({"tokens", "password", "authorities"})
+    @JsonIgnoreProperties({"tokens", "password", "authorities", "orders"})
     @JoinColumn(name = "user_id")
     private User user;
     @OneToOne

@@ -33,7 +33,7 @@ public class CartController {
     @PostMapping("/add")
     public ResponseEntity<CartResponse> addItemToCart(@RequestBody CartItemDto cartItemDto, Principal principalUser) throws Exception {
         Optional<Product> product = repository.findById(cartItemDto.getProductId());
-        if(product.isEmpty()){
+        if (product.isEmpty()) {
             throw new Exception();
         }
 
@@ -52,22 +52,21 @@ public class CartController {
     @PostMapping("/removeQuantity")
     public ResponseEntity<?> removeQuantity(@RequestBody Long cartItemId, Principal principalUser) {
         User user = userService.getCurrentUser(principalUser);
-        service.removeQuantity(cartItemId, user);
-        return ResponseEntity.ok(cartItemId);
+        return ResponseEntity.ok(service.removeQuantity(cartItemId, user));
     }
 
     @PostMapping("/addQuantity")
     public ResponseEntity<?> addQuantity(@RequestBody Long cartItemId, Principal principalUser) {
         var user = userService.getCurrentUser(principalUser);
-        service.addQuantity(cartItemId, user);
-        return ResponseEntity.ok(cartItemId);
+
+        return ResponseEntity.ok(service.addQuantity(cartItemId, user));
     }
 
     @DeleteMapping("/remove/{cartItemId}")
     public ResponseEntity<?> removeCartItem(@PathVariable Long cartItemId, Principal user) throws Exception {
         var optionalUser = userService.getCurrentUser(user);
-        service.removeCartItem(cartItemId, optionalUser);
-        return ResponseEntity.ok(cartItemId);
+
+        return ResponseEntity.ok(service.removeCartItem(cartItemId, optionalUser));
     }
 
     @GetMapping("/all")

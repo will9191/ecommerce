@@ -10,6 +10,7 @@ import com.example.ecommerce.payment.Payment;
 import com.example.ecommerce.payment.PaymentDto;
 import com.example.ecommerce.payment.PaymentRepository;
 import com.example.ecommerce.payment.PaymentStatus;
+import com.example.ecommerce.product.Product;
 import com.example.ecommerce.user.User;
 import com.example.ecommerce.user.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -68,6 +69,10 @@ private final UserRepository userRepository;
         order.setOrderPrice(getTotalPrice(orderItemList));
         order.setPayment(payment);
         repository.save(order);
+    }
+
+    public Optional<Order> findById(Long id) {
+        return repository.findById(id);
     }
 
     public void payOrder(PaymentDto paymentDto, User user) throws Exception {

@@ -76,7 +76,8 @@ public class CartService {
         if (cartItem.isPresent()) {
             var cartItemExists = cartItem.get();
             cart.getCartItems().remove(cartItemExists);
-            return ResponseEntity.ok(cartRepository.save(cart));
+            cartRepository.save(cart);
+            return ResponseEntity.ok(cart);
         } else {
             return ResponseEntity.badRequest().build();
         }
@@ -95,7 +96,8 @@ public class CartService {
             size.setQuantity(size.getQuantity() - 1);
             cartItem.setSize(size);
         }
-        return ResponseEntity.ok(cartRepository.save(cart));
+        cartRepository.save(cart);
+        return ResponseEntity.ok(cart);
     }
 
     public ResponseEntity<?> addQuantity(Long cartId, User user) {
@@ -105,7 +107,8 @@ public class CartService {
         Size size = cartItem.getSize();
         size.setQuantity(size.getQuantity() + 1);
         cartItem.setSize(size);
-        return ResponseEntity.ok(cartRepository.save(cart));
+        cartRepository.save(cart);
+        return ResponseEntity.ok(cart);
     }
 
     public ResponseEntity<?> getCartByUser(User user) {

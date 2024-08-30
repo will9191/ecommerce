@@ -1,6 +1,7 @@
 package com.example.ecommerce.order;
 
 import com.example.ecommerce.payment.PaymentDto;
+import com.example.ecommerce.product.Product;
 import com.example.ecommerce.user.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -8,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("api/v1/order")
@@ -44,5 +46,10 @@ public class OrderController {
     public ResponseEntity<?> getOrdersByUser(Principal principalUser){
         var user = userService.getCurrentUser(principalUser);
         return ResponseEntity.ok(service.getOrdersByUser(user));
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Optional<Order>> getById(@PathVariable Long id) {
+        return ResponseEntity.ok(service.findById(id));
     }
 }
