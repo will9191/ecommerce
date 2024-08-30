@@ -10,16 +10,6 @@ import { apiEndpoint } from '../constants/constants';
   providedIn: 'root',
 })
 export class AuthService {
-  private isLoggedInSubject = new BehaviorSubject<boolean>(false);
-  private isAdminSubject = new BehaviorSubject<boolean>(false);
-  private accessTokenSubject = new BehaviorSubject<string | null>(null);
-  private refreshTokenSubject = new BehaviorSubject<string | null>(null);
-
-  isLoggedIn$ = this.isLoggedInSubject.asObservable();
-  isAdmin$ = this.isAdminSubject.asObservable();
-  accessToken$ = this.accessTokenSubject.asObservable();
-  refreshToken$ = this.refreshTokenSubject.asObservable();
-
   constructor(private httpClient: HttpClient) {}
 
   login(email: string, password: string): Observable<any> {
@@ -30,19 +20,12 @@ export class AuthService {
       })
       .pipe(
         tap((value) => {
-          this.accessTokenSubject.next(value.access_token);
-          this.refreshTokenSubject.next(value.refresh_token);
-          this.isLoggedInSubject.next(true);
-          this.isAdminSubject.next(value.isAdmin || false);
-          console.log(
-            this.isLoggedIn$.subscribe((isLogged) => {
-              console.log(isLogged);
-            })
-          );
-          console.log(
-            this.accessToken$.subscribe((isLogged) => {
-              console.log(isLogged);
-            })
+          localStorage.setItem('access_token', value.access_token);
+          localStorage.setItem('refresh_token', value.refresh_token);
+
+          localStorage.setItem(
+            'is_admin',
+            JSON.stringify(value.isAdmin || false)
           );
         })
       );
@@ -63,10 +46,12 @@ export class AuthService {
       })
       .pipe(
         tap((value) => {
-          this.accessTokenSubject.next(value.access_token);
-          this.refreshTokenSubject.next(value.refresh_token);
-          this.isLoggedInSubject.next(true);
-          this.isAdminSubject.next(value.isAdmin || false);
+          localStorage.setItem('access_token', value.access_token);
+          localStorage.setItem('refresh_token', value.refresh_token);
+          localStorage.setItem(
+            'is_admin',
+            JSON.stringify(value.isAdmin || false)
+          );
         })
       );
   }
@@ -74,23 +59,22 @@ export class AuthService {
   logout(): void {
     this.httpClient.get<any>(`${apiEndpoint.AuthEndpoint.logout}`).subscribe({
       next: () => {
-        this.accessTokenSubject.next(null);
-        this.refreshTokenSubject.next(null);
-        this.isLoggedInSubject.next(false);
-        this.isAdminSubject.next(false);
+        localStorage.removeItem('access_token');
+        localStorage.removeItem('refresh_token');
+        localStorage.removeItem('is_admin');
       },
     });
   }
 
   isLoggedIn(): boolean {
-    return this.isLoggedInSubject.value;
+    return !!localStorage.getItem('access_token');
   }
 
   isAdmin(): boolean {
-    return this.isAdminSubject.value;
+    return JSON.parse(localStorage.getItem('is_admin') || 'false');
   }
 
   getAuthToken(): string | null {
-    return this.accessTokenSubject.value;
+    return localStorage.getItem('access_token');
   }
 }

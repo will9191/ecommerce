@@ -11,15 +11,17 @@
       <div class="space-x-4 flex justify-center items-center">
         <ng-icon
           routerLink="admin/dashboard"
-          *ngIf="authService.isLoggedIn$ | async"
+          *ngIf="isLoggedIn && isAdmin"
           class="cursor-pointer"
           name="matDashboardOutline"
         />
         <div class="relative flex p-1.5" (click)="openCart()">
           <div
-            class="absolute top-0 right-0 bg-red-800 text-white w-3.5 h-3.5 rounded-full text-xs items-center justify-center flex"
+            class="absolute top-0 right-0 bg-red-800 text-white w-3.5 h-3.5 rounded-full text-xs"
           >
-            {{ cartLength }}
+            <div class="flex items-center justify-center">
+              {{ cartLength || 0}}
+            </div>
           </div>
           <ng-icon class="cursor-pointer" name="matShoppingCartOutline" />
         </div>
@@ -30,7 +32,7 @@
           routerLink="/user"
         ></ng-icon>
         <ng-icon
-          *ngIf="authService.isLoggedIn$ | async"
+          *ngIf="isLoggedIn"
           name="matLogoutOutline"
           (click)="logout()"
         ></ng-icon>

@@ -10,6 +10,8 @@ import { CartService } from '../../services/cart.service';
 import { CommonModule } from '@angular/common';
 import { NavbarComponent } from '../navbar/navbar.component';
 import { MatDialogRef } from '@angular/material/dialog';
+import { OrdersService } from '../../services/orders.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-cart-item',
@@ -20,15 +22,17 @@ import { MatDialogRef } from '@angular/material/dialog';
 })
 export class CartItemComponent implements OnInit {
   constructor(
-    private cartService: CartService,
-    private ref: MatDialogRef<CartItemComponent>
+    public cartService: CartService,
+    private orderService: OrdersService,
+    private ref: MatDialogRef<CartItemComponent>,
+    private toastrService: ToastrService
   ) {
     ref.backdropClick().subscribe(() => {
       ref.close();
     });
   }
 
-  cart: any;
+  cart: any = this.cartService.cart$;
 
   ngOnInit(): void {
     this.getCart();
@@ -37,8 +41,7 @@ export class CartItemComponent implements OnInit {
   removeItem(id: number) {
     this.cartService.removeCartItem(id).subscribe({
       next: (data: any) => {
-        console.log(data);
-        this.getCart();
+        this.cart = data.body;
       },
     });
   }
@@ -46,8 +49,7 @@ export class CartItemComponent implements OnInit {
   removeQuantity(id: number) {
     this.cartService.removeQuantity(id).subscribe({
       next: (data: any) => {
-        console.log(data);
-        this.getCart();
+        this.cart = data.body;
       },
     });
   }
@@ -55,8 +57,7 @@ export class CartItemComponent implements OnInit {
   addQuantity(id: number) {
     this.cartService.addQuantity(id).subscribe({
       next: (data: any) => {
-        console.log(data);
-        this.getCart();
+        this.cart = data.body;
       },
     });
   }
@@ -67,6 +68,15 @@ export class CartItemComponent implements OnInit {
         this.cart = data;
         console.log(data);
       },
+    });
+  }
+
+  saveOrder() {
+    const cartItemsId = this.cart.cartItems.map((item: any) => item.id);
+
+    this.orderService.saveOrder(cartItemsId).subscribe({
+      next: () => this.cartService.loadCart(),
+      error: () => this.toastrService.error('Error on ordering!'),
     });
   }
 

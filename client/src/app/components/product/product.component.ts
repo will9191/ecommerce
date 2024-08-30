@@ -7,7 +7,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { CartService } from '../../services/cart.service';
 import { ToastrService } from 'ngx-toastr';
-import { NavbarComponent } from '../navbar/navbar.component';
 import { Router } from '@angular/router';
 
 
@@ -23,9 +22,7 @@ export class ProductComponent implements OnInit {
     private productService: ProductService,
     private cartService: CartService,
     private toastrService: ToastrService,
-    private router: Router,
-    @Inject(NavbarComponent) private navbar: NavbarComponent,
-    
+    private router: Router, 
   ) {}
 
   @Input() id: number = 0;

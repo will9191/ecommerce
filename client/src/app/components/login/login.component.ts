@@ -50,7 +50,7 @@ export class LoginComponent {
     this.authService
       .login(this.loginForm.value.email, this.loginForm.value.password)
       .subscribe({
-        // next: () => this.router.navigate(['/']),
+        next: () => this.router.navigate(['/']),
         error: () => this.toastrService.error('Error on login!'),
       });
   }

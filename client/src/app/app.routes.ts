@@ -17,8 +17,8 @@ import { DashboardUsersComponent } from './components/dashboard/dashboard-users/
 import { DashboardOrdersComponent } from './components/dashboard/dashboard-orders/dashboard-orders.component';
 import { DashboardSizesComponent } from './components/dashboard/dashboard-sizes/dashboard-sizes.component';
 import { CartItemComponent } from './components/cart-item/cart-item.component';
-import { OrdersComponent } from './components/orders/orders.component';
 import { AdminGuardService } from './services/admin-guard.service';
+import { OrderDetailsComponent } from './components/order-details/order-details.component';
 
 export const routes: Routes = [
   {
@@ -50,8 +50,8 @@ export const routes: Routes = [
         canActivate: [AuthGuard],
       },
       {
-        path: 'user/orders',
-        component: OrdersComponent,
+        path: 'user/orders/:id',
+        component: OrderDetailsComponent,
         title: 'Orders',
         canActivate: [AuthGuard],
       },

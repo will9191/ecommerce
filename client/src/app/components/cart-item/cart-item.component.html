@@ -26,15 +26,15 @@
             <div class="flex gap-2">
               <div
                 class="bg-red-800 w-5 h-5 text-center rounded-full text-white"
-                (click)="removeQuantity(cartItem.cartItemId)"
+                (click)="removeQuantity(cartItem.id)"
               >
                 -
               </div>
               <div
-                class="bg-green-700 w-5 h-5 text-center rounded-full text-white"
-                (click)="addQuantity(cartItem.cartItemId)"
+                class="bg-green-700 w-5 h-5 flex items-center justify-center text-center rounded-full text-white"
+                (click)="addQuantity(cartItem.id)"
               >
-                +
+                <div>+</div>
               </div>
             </div>
           </div>
@@ -45,7 +45,7 @@
       <div class="items-center">
         <div
           class="bg-red-800 p-3 w-2 h-2 text-center rounded-full right-0 float-end text-white items-center flex justify-center"
-          (click)="removeItem(cartItem.cartItemId)"
+          (click)="removeItem(cartItem.id)"
         >
           x
         </div>
@@ -59,6 +59,7 @@
     <div class="">Total Price: ${{ cart.totalPrice }}</div>
     <div
       class="bg-green-700 text-center rounded-full w-full bottom-0 text-white"
+      (click)="saveOrder()"
     >
       Order
     </div>

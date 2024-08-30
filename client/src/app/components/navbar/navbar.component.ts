@@ -67,22 +67,24 @@ export class NavbarComponent implements OnInit {
   categories: any;
   isOpen: boolean = false;
   menuOpen: boolean = false;
-
-  cart: any;
-  cartLength: any = 0;
+  cartLength: number = 0;
 
   ngOnInit(): void {
     this.getCategories();
     this.getCart();
-    this.authService.isLoggedIn$.subscribe((isLoggedIn) => {
-      console.log('Is logged in:', isLoggedIn);
-    });
+  }
+
+  get isLoggedIn(): boolean{
+    return this.authService.isLoggedIn();
+  }
+
+  get isAdmin(): boolean {
+    return this.authService.isAdmin();
   }
 
   getCart() {
     this.cartService.getCart().subscribe({
       next: (data: any) => {
-        this.cart = data;
         this.cartLength = data.cartItems.length;
         console.log(data);
       },

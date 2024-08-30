@@ -1,0 +1,35 @@
+<div class="justify-center flex flex-col items-center text-center">
+  @defer (when order) {
+  <div class="title text-2xl">Pedido #{{ order.id }}</div>
+  <div class="">
+    @for (orderItem of order.orderItems; track $index) {
+    <div class="order flex items-center w-screen justify-center space-x-1">
+      <img
+        class="w-20 h-20"
+        routerLink="/product/{{ orderItem.product.id }}"
+        src="{{ orderItem.product.image }}"
+        alt=""
+      />
+      <div class="grid grid-cols-2 space-x-3">
+        <div>{{ orderItem.product.name }}</div>
+        <div>Size: {{ orderItem.size.name }}</div>
+        <div>Quantity: {{ orderItem.size.quantity }}</div>
+        <div>Price: ${{ orderItem.price * orderItem.size.quantity }}</div>
+      </div>
+    </div>
+    }
+    <div>Order Status: {{ order.orderStatus }}</div>
+    <div>Total Price: ${{ order.orderPrice }}</div>
+    @if (order.payment.paymentStatus == "NOTPAID") {
+    <div>Payment Status: NOT PAID</div>
+    <div class="flex justify-center">
+      <button
+        class="bg-green-700 text-xl flex justify-center text-white cursor-pointer"
+      >
+        PAY
+      </button>
+    </div>
+    }
+  </div>
+  }
+</div>

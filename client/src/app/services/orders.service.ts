@@ -12,4 +12,14 @@ export class OrdersService {
   getUserOrders(): Observable<any> {
     return this.httpClient.get<any>(`${apiEndpoint.OrdersEndpoint.userOrders}`);
   }
+
+  saveOrder(cartItemsId: number[]): Observable<any> {
+    return this.httpClient.post<any>(`${apiEndpoint.OrdersEndpoint.base}`, {cartItemsId});
+  }
+
+  getOrderById(id: number): Observable<any> {
+    return this.httpClient.get<any>(
+      `${apiEndpoint.OrdersEndpoint.base}/${id}`
+    );
+  }
 }

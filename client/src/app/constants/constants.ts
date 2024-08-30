@@ -25,6 +25,7 @@ export const apiEndpoint = {
     profile: `${API_URL}/api/v1/user/profile`,
   },
   OrdersEndpoint: {
+    base: `${API_URL}/api/v1/order`,
     userOrders: `${API_URL}/api/v1/order`,
   },
 };
