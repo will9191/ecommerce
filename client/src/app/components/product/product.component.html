@@ -9,7 +9,7 @@
     <div>{{ product.description }}</div>
     <div class="items-center justify-center flex flex-col">
       <ul class="selectClass">
-        @for (size of product.sizes; track $index) {
+        @for (size of product.sizes; track product.sizes.idaa) {
         <li class="optionClass">
           <input
             id="{{ size.name }}"
