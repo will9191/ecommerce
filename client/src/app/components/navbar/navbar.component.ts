@@ -113,8 +113,11 @@ export class NavbarComponent implements OnInit {
   logout() {
     this.authService.logout().subscribe({
       next: () => {
+        localStorage.removeItem('access_token');
+        localStorage.removeItem('refresh_token');
+        localStorage.removeItem('is_admin');
         this.toastrService.success('Logged Out!');
-        this.router.navigate(['/login']);
+        this.router.navigate(['login']);
       },
     });
   }

@@ -56,14 +56,8 @@ export class AuthService {
       );
   }
 
-  logout(): any {
-    this.httpClient.get<any>(`${apiEndpoint.AuthEndpoint.logout}`).subscribe({
-      next: () => {
-        localStorage.removeItem('access_token');
-        localStorage.removeItem('refresh_token');
-        localStorage.removeItem('is_admin');
-      },
-    });
+  logout(): Observable<any> {
+    return this.httpClient.get<any>(`${apiEndpoint.AuthEndpoint.logout}`);
   }
 
   isLoggedIn(): boolean {
