@@ -57,7 +57,7 @@ import { AuthService } from '../../services/auth.service';
 export class NavbarComponent implements OnInit {
   constructor(
     private categoryService: CategoryService,
-    private cartService: CartService,
+    public cartService: CartService,
     private toastrService: ToastrService,
     private router: Router,
     private matDialog: MatDialog,
@@ -74,7 +74,7 @@ export class NavbarComponent implements OnInit {
     this.getCart();
   }
 
-  get isLoggedIn(): boolean{
+  get isLoggedIn(): boolean {
     return this.authService.isLoggedIn();
   }
 
@@ -83,16 +83,11 @@ export class NavbarComponent implements OnInit {
   }
 
   getCart() {
-    this.cartService.getCart().subscribe({
-      next: (data: any) => {
-        this.cartLength = data.cartItems.length;
-        console.log(data);
-      },
-    });
+    return this.cartService.loadCart();
   }
 
   openCart() {
-    if (this.authService.getAuthToken() != null) {
+    if (this.isLoggedIn) {
       this.matDialog.open(CartItemComponent, { disableClose: true });
     } else {
       this.router.navigate(['/login']);
@@ -115,13 +110,12 @@ export class NavbarComponent implements OnInit {
     }
   }
 
-  // logout() {
-  //   this.authService.logout().subscribe({
-  //     next: () => {
-  //       this.toastrService.success('Logged Out!');
-  //       this.router.navigate(['/login']);
-  //     },
-  //   });
-  // }
-  logout() {}
+  logout() {
+    this.authService.logout().subscribe({
+      next: () => {
+        this.toastrService.success('Logged Out!');
+        this.router.navigate(['/login']);
+      },
+    });
+  }
 }

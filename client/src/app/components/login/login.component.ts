@@ -12,6 +12,7 @@ import { MatInputModule } from '@angular/material/input';
 import { Router, RouterModule } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from '../../services/auth.service';
+import { ToastrComponent } from '../toastr/toastr.component';
 
 interface LoginForm {
   email: FormControl;
@@ -29,6 +30,7 @@ interface LoginForm {
     ReactiveFormsModule,
     RouterModule,
   ],
+  providers: [ToastrComponent],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
 })
@@ -38,7 +40,7 @@ export class LoginComponent {
   constructor(
     private router: Router,
     public authService: AuthService,
-    private toastrService: ToastrService
+    private toastrComponent: ToastrComponent
   ) {
     this.loginForm = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.email]),
@@ -50,8 +52,11 @@ export class LoginComponent {
     this.authService
       .login(this.loginForm.value.email, this.loginForm.value.password)
       .subscribe({
-        next: () => this.router.navigate(['/']),
-        error: () => this.toastrService.error('Error on login!'),
+        next: () => {
+          this.toastrComponent.showSuccess('Logged In!'),
+            this.router.navigate(['/']);
+        },
+        error: () => this.toastrComponent.showError('Error on login!'),
       });
   }
 }

@@ -8,12 +8,14 @@ import { MatInputModule } from '@angular/material/input';
 import { CartService } from '../../services/cart.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
-
+import { AuthService } from '../../services/auth.service';
+import { ToastrComponent } from '../toastr/toastr.component';
 
 @Component({
   selector: 'app-product',
   standalone: true,
   imports: [CommonModule, MatFormFieldModule, MatInputModule],
+  providers: [ToastrComponent],
   templateUrl: './product.component.html',
   styleUrl: './product.component.scss',
 })
@@ -22,7 +24,9 @@ export class ProductComponent implements OnInit {
     private productService: ProductService,
     private cartService: CartService,
     private toastrService: ToastrService,
-    private router: Router, 
+    private router: Router,
+    private authService: AuthService,
+    private toastrComponent: ToastrComponent
   ) {}
 
   @Input() id: number = 0;
@@ -48,15 +52,12 @@ export class ProductComponent implements OnInit {
 
   click(sizeName: any) {
     this.sizeName = sizeName;
-    console.log(this.sizeName);
     this.data.productId = this.id;
     this.data.size.name = sizeName;
-    return console.log(this.id);
   }
 
   submit() {
-    // const authToken = this.auth.getAuthToken();
-    // if (authToken) {
+    if (this.authService.isLoggedIn()) {
       if (this.sizeName) {
         console.log(this.id);
         console.log(this.size);
@@ -66,13 +67,12 @@ export class ProductComponent implements OnInit {
           next: () => this.toastrService.success('Successfully added!'),
           error: () => this.router.navigate(['']),
         });
-        window.location.reload();
       } else {
-        this.toastrService.error('You should add one size!');
+        this.toastrComponent.showWarning('You should add one size!');
       }
-    // } else {
-    //   this.router.navigate(['/login']);
-    // }
+    } else {
+      this.router.navigate(['login']);
+    }
   }
 
   getProductById() {

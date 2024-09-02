@@ -1,5 +1,5 @@
 <div
-  class="fixed pb-10 px-10 pt-3 items-center z-50 top-0 right-0 bottom-0 min-w-64 bg-white shadow-xl flex flex-col"
+  class="fixed pb-10 px-10 pt-3 items-center z-50 top-0 right-0 bottom-0 min-w-64 bg-white shadow-xl flex flex-col text-lg"
 >
   <p class="text-center border-b border-0 border-solid border-black text-2xl">
     My Cart
@@ -25,13 +25,13 @@
             Quantity: {{ cartItem.size.quantity }}
             <div class="flex gap-2">
               <div
-                class="bg-red-800 w-5 h-5 text-center rounded-full text-white"
+                class="bg-red-800 w-5 h-5 text-center rounded-full text-white cursor-pointer"
                 (click)="removeQuantity(cartItem.id)"
               >
                 -
               </div>
               <div
-                class="bg-green-700 w-5 h-5 flex items-center justify-center text-center rounded-full text-white"
+                class="bg-green-700 w-5 h-5 flex items-center justify-center text-center rounded-full text-white cursor-pointer"
                 (click)="addQuantity(cartItem.id)"
               >
                 <div>+</div>
@@ -44,7 +44,7 @@
 
       <div class="items-center">
         <div
-          class="bg-red-800 p-3 w-2 h-2 text-center rounded-full right-0 float-end text-white items-center flex justify-center"
+          class="bg-red-800 p-3 w-2 h-2 text-center rounded-full right-0 float-end text-white items-center flex justify-center cursor-pointer"
           (click)="removeItem(cartItem.id)"
         >
           x
@@ -58,7 +58,7 @@
   >
     <div class="">Total Price: ${{ cart.totalPrice }}</div>
     <div
-      class="bg-green-700 text-center rounded-full w-full bottom-0 text-white"
+      class="bg-green-700 text-center rounded-full w-full bottom-0 text-white py-5 cursor-pointer text-2xl"
       (click)="saveOrder()"
     >
       Order

@@ -3,7 +3,6 @@
     <div class="items-center grid grid-cols-3 w-full justify-center my-4">
       <div class="flex justify-center">
         <ng-icon class="cursor-pointer" name="matInfoOutline" />
-        <ng-icon name="matSearchOutline" />
       </div>
       <div class="logo flex flex-col text-center cursor-pointer" routerLink="">
         W <span>Clothing</span>
@@ -20,7 +19,7 @@
             class="absolute top-0 right-0 bg-red-800 text-white w-3.5 h-3.5 rounded-full text-xs"
           >
             <div class="flex items-center justify-center">
-              {{ cartLength || 0}}
+              {{ (this.cartService.cartItemsLength$ | async) || 0 }}
             </div>
           </div>
           <ng-icon class="cursor-pointer" name="matShoppingCartOutline" />

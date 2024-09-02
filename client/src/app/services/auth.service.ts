@@ -56,7 +56,7 @@ export class AuthService {
       );
   }
 
-  logout(): void {
+  logout(): any {
     this.httpClient.get<any>(`${apiEndpoint.AuthEndpoint.logout}`).subscribe({
       next: () => {
         localStorage.removeItem('access_token');
