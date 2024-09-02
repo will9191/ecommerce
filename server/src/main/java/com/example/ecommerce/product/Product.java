@@ -34,5 +34,6 @@ public class Product {
     private Category category;
     @Embedded
     @ElementCollection(fetch = FetchType.EAGER)
-    private Set<Size> sizes;
+    @OrderColumn
+    private List<Size> sizes;
 }

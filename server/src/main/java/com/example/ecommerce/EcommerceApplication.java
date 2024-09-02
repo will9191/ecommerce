@@ -2,13 +2,10 @@ package com.example.ecommerce;
 
 import com.example.ecommerce.auth.AuthenticationService;
 import com.example.ecommerce.auth.RegisterRequest;
-import com.example.ecommerce.category.Category;
 import com.example.ecommerce.category.CategoryDto;
-import com.example.ecommerce.category.CategoryRepository;
 import com.example.ecommerce.category.CategoryService;
 import com.example.ecommerce.product.ProductController;
 import com.example.ecommerce.product.ProductDto;
-import com.example.ecommerce.product.ProductService;
 import com.example.ecommerce.size.Size;
 import com.example.ecommerce.size.SizeType;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -19,9 +16,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 
 import static com.example.ecommerce.user.Role.ADMIN;
@@ -38,8 +35,8 @@ public class EcommerceApplication {
     public CommandLineRunner commandLineRunner(
             AuthenticationService service,
             CategoryService categoryService,
-            ProductController productController,
-            CategoryRepository categoryRepository
+            ProductController productController
+
     ) {
         return args -> {
             var admin = RegisterRequest.builder()
@@ -77,12 +74,13 @@ public class EcommerceApplication {
             categoryService.save(category3);
 
 
-            var size1 = new Size(SizeType.P, 100);
-            var size2 = new Size(SizeType.M, 200);
-            var size3 = new Size(SizeType.G, 300);
-            var size4 = new Size(SizeType.GG, 400);
-            var size5 = new Size(SizeType.XG, 500);
-            Set<Size> sizes = new HashSet<>(List.of(new Size[]{size1, size2, size3, size4, size5}));
+            var size1 = new Size(1,SizeType.P, 50);
+            var size2 = new Size(2,SizeType.M, 50);
+            var size3 = new Size(3,SizeType.G, 50);
+            var size4 = new Size(4,SizeType.GG, 50);
+            var size5 = new Size(5,SizeType.XG, 50);
+
+            List<Size> sizes = new ArrayList<>(List.of(new Size[]{size1, size2, size3, size4, size5}));
 
             var product1 = ProductDto.builder()
                     .name("Caktus Jack")

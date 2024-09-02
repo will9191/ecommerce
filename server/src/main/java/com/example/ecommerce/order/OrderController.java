@@ -21,9 +21,9 @@ public class OrderController {
     @PostMapping
     public ResponseEntity<?> saveOrder(@RequestBody OrderDto orderDto, Principal user) throws Exception {
         var principalUser = userService.getCurrentUser(user);
-        service.saveOrder(orderDto, principalUser);
 
-        return ResponseEntity.ok("ok");
+
+        return ResponseEntity.ok(service.saveOrder(orderDto, principalUser));
     }
 
     @PostMapping("/pay")

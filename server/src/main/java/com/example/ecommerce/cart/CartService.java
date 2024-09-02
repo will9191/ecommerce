@@ -65,6 +65,7 @@ public class CartService {
         }
 
         cart.setCartItems(cartItemsList);
+        cart.setTotalPrice(this.getTotalPrice(cartItemsList));
         cartRepository.save(cart);
 
         return CartResponse.builder().cartItems(cartItemsList).cartId(cart.getId()).build();
@@ -76,6 +77,7 @@ public class CartService {
         if (cartItem.isPresent()) {
             var cartItemExists = cartItem.get();
             cart.getCartItems().remove(cartItemExists);
+            cart.setTotalPrice(this.getTotalPrice(cart.getCartItems()));
             cartRepository.save(cart);
             return ResponseEntity.ok(cart);
         } else {
@@ -96,6 +98,7 @@ public class CartService {
             size.setQuantity(size.getQuantity() - 1);
             cartItem.setSize(size);
         }
+        cart.setTotalPrice(this.getTotalPrice(cart.getCartItems()));
         cartRepository.save(cart);
         return ResponseEntity.ok(cart);
     }
@@ -107,6 +110,7 @@ public class CartService {
         Size size = cartItem.getSize();
         size.setQuantity(size.getQuantity() + 1);
         cartItem.setSize(size);
+        cart.setTotalPrice(this.getTotalPrice(cart.getCartItems()));
         cartRepository.save(cart);
         return ResponseEntity.ok(cart);
     }

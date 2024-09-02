@@ -29,10 +29,11 @@ public class OrderService {
     private final OrderRepository repository;
     private final CartItemRepository cartItemRepository;
     private final OrderItemRepository orderItemRepository;
-private final CartRepository cartRepository;
-private final PaymentRepository paymentRepository;
-private final UserRepository userRepository;
-    public void saveOrder(OrderDto orderDto, User user) {
+    private final CartRepository cartRepository;
+    private final PaymentRepository paymentRepository;
+    private final UserRepository userRepository;
+
+    public ResponseEntity<?> saveOrder(OrderDto orderDto, User user) {
         Order order = new Order();
         order.setOrderItems(new ArrayList<>());
         Cart cart = cartRepository.findByUser(user);
@@ -49,7 +50,7 @@ private final UserRepository userRepository;
 //            orderItem.setSize(cartItem.getSize());
 
 
-         OrderItem orderItem =  OrderItem.builder().product(cartItem.getProduct()).price(cartItem.getPrice()).order(order).size(cartItem.getSize()).build();
+            OrderItem orderItem = OrderItem.builder().product(cartItem.getProduct()).price(cartItem.getPrice()).order(order).size(cartItem.getSize()).build();
 
             orderItemRepository.save(orderItem);
             orderItemList.add(orderItem);
@@ -69,6 +70,7 @@ private final UserRepository userRepository;
         order.setOrderPrice(getTotalPrice(orderItemList));
         order.setPayment(payment);
         repository.save(order);
+        return ResponseEntity.ok(order);
     }
 
     public Optional<Order> findById(Long id) {
@@ -77,7 +79,7 @@ private final UserRepository userRepository;
 
     public void payOrder(PaymentDto paymentDto, User user) throws Exception {
         Optional<Payment> payment = paymentRepository.findById(paymentDto.getPaymentId());
-        if (payment.isEmpty()){
+        if (payment.isEmpty()) {
             throw new Exception();
         }
         if (user.getCoins() > payment.get().getAmount()) {
@@ -85,15 +87,15 @@ private final UserRepository userRepository;
             payment.get().getOrder().setOrderStatus(OrderStatus.PAID);
             paymentRepository.save(payment.get());
 
-            user.setCoins(user.getCoins()-payment.get().getAmount());
+            user.setCoins(user.getCoins() - payment.get().getAmount());
             userRepository.save(user);
-        } else{
+        } else {
             throw new Exception("Not enough coins!");
         }
     }
 
-    public List<Order> getOrdersByUser(User user){
-       return repository.findByUser(user);
+    public List<Order> getOrdersByUser(User user) {
+        return repository.findByUser(user);
     }
 
     public Double getTotalPrice(List<OrderItem> orderItems) {

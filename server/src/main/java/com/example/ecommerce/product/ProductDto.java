@@ -17,5 +17,5 @@ public class ProductDto {
     private String description;
     private double price;
     private Long categoryId;
-    private Set<Size> sizes;
+    private List<Size> sizes;
 }
