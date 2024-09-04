@@ -33,7 +33,7 @@ export class CartService {
   addToCart(data: any): Observable<any> {
     return this.httpClient
       .post<any>(`${apiEndpoint.CartEndpoint.add}`, data)
-      .pipe(tap((data: any) => this.updateCart(data)));
+      .pipe(tap((data: any) => this.updateCart(data.body)));
   }
 
   updateCart(data: any) {
