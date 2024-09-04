@@ -32,7 +32,7 @@ public class CartService {
 
     private ApplicationAuditAware auditAware;
 
-    public CartResponse addItemToCart(CartItemDto cartItemDto, Product product, User user) {
+    public ResponseEntity<?> addItemToCart(CartItemDto cartItemDto, Product product, User user) {
         Cart cart = cartRepository.findByUser(user);
 
         if (cart == null) {
@@ -68,7 +68,7 @@ public class CartService {
         cart.setTotalPrice(this.getTotalPrice(cartItemsList));
         cartRepository.save(cart);
 
-        return CartResponse.builder().cartItems(cartItemsList).cartId(cart.getId()).build();
+        return ResponseEntity.ok(cart);
     }
 
     public ResponseEntity<?> removeCartItem(Long cartId, User user) {

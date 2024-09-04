@@ -31,7 +31,7 @@ public class CartController {
     private final UserService userService;
 
     @PostMapping("/add")
-    public ResponseEntity<CartResponse> addItemToCart(@RequestBody CartItemDto cartItemDto, Principal principalUser) throws Exception {
+    public ResponseEntity<?> addItemToCart(@RequestBody CartItemDto cartItemDto, Principal principalUser) throws Exception {
         Optional<Product> product = repository.findById(cartItemDto.getProductId());
         if (product.isEmpty()) {
             throw new Exception();
