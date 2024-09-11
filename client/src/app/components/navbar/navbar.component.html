@@ -2,7 +2,11 @@
   <nav id="navbar" class="navbar w-full pb-5 top-0 z-40 bg-white">
     <div class="items-center grid grid-cols-3 w-full justify-center my-4">
       <div class="flex justify-center">
-        <ng-icon class="cursor-pointer" name="matInfoOutline" />
+        <ng-icon
+          class="cursor-pointer"
+          (click)="openInfo()"
+          name="matInfoOutline"
+        />
       </div>
       <div class="logo flex flex-col text-center cursor-pointer" routerLink="">
         W <span>Clothing</span>

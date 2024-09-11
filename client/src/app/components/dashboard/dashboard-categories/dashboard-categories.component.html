@@ -1,1 +1,27 @@
-<p>dashboard-categories works!</p>
+<div class="">
+  <table>
+    <caption>
+      Categories
+    </caption>
+    <thead>
+      <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Image</th>
+        <th scope="col">Name</th>
+        <th scope="col">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (category of categories; track $index) {
+      <tr class="">
+        <th>{{ category.id }}</th>
+        <td><img class="w-10 h-10" src="{{ category.imageUrl }}" alt="" /></td>
+        <td>{{ category.name }}</td>
+        <td>{{ category.description }}</td>
+      </tr>
+      } @empty {
+      <div>No products found</div>
+      }
+    </tbody>
+  </table>
+</div>

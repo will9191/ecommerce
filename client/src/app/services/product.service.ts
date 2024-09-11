@@ -16,6 +16,6 @@ export class ProductService {
   }
 
   getAllProducts(): Observable<any> {
-    return this.httpClient.get<any>(`${apiEndpoint.ProductEndpoint.getById}`);
+    return this.httpClient.get<any>(`${apiEndpoint.ProductEndpoint.base}`);
   }
 }

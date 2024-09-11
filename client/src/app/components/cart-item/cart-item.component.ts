@@ -38,7 +38,7 @@ export class CartItemComponent implements OnInit {
     });
   }
 
-  cart: any;
+  cart: any = [];
   order: any;
 
   ngOnInit(): void {
@@ -49,6 +49,9 @@ export class CartItemComponent implements OnInit {
     return this.cartService.getCart().subscribe({
       next: (data: any) => {
         this.cart = data;
+      },
+      error: (any) => {
+        this.cart = [];
       },
     });
   }
@@ -78,16 +81,19 @@ export class CartItemComponent implements OnInit {
   }
 
   saveOrder() {
-    const cartItemsId = this.cart.cartItems.map((item: any) => item.id);
+    const cartItemsId = (this.cart.cartItems || []).map((item: any) => item.id);
     this.orderService.saveOrder(cartItemsId).subscribe({
       next: (data: any) => {
-        this.order = data.body;
+        this.order = data;
         this.cartService.loadCart();
         this.closeCart();
         this.toastrComponent.showSuccess('Order created!');
         this.router.navigate([`user/orders/${this.order.id}`]);
       },
-      error: () => this.toastrService.error('Error on ordering!'),
+      error: () =>
+        this.toastrComponent.showWarning(
+          "You don't have products to be ordered! Add one or more!"
+        ),
     });
   }
 

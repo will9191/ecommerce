@@ -1,15 +1,18 @@
-<div class="shadow-md bg-neutral-600 fixed bottom-0 top-0">
+
+<div class="shadow-xl fixed text-black w-16 bottom-0 top-0 left-0">
   <div class="flex-col flex gap-6 mt-3 px-3 items-center">
-    <div routerLink="/dashboard/users" class="text-white cursor-pointer">W</div>
+    <div routerLink="/dashboard/users" class="cursor-pointer text-2xl">W</div>
     @for (menuItem of menuItems; track $index) {
 
     <fa-icon
-      class="text-white cursor-pointer"
+      class="cursor-pointer"
       [routerLink]="menuItem.link"
       [icon]="menuItem.icon"
     ></fa-icon>
-    
+
     }
   </div>
 </div>
-<router-outlet></router-outlet>
+<div class="ml-16">
+<router-outlet ></router-outlet>
+</div>

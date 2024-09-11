@@ -1,0 +1,18 @@
+<div class="flex text-center items-center bg-black text-white ">
+  <div class="text-xl w-96">
+    Hi, I'm Willian Pereira (will9191) and I developed this project. If you want
+    to suggest any changes or contact me, you can follow these links:
+    <div class="flex space-x-6 justify-center text-black">
+      @for (socialLink of socialLinks; track $index) {<a
+        href="{{ socialLink.link }}"
+        target="_blank"
+        class="hover:scale-110 duration-150"
+      >
+        <img src="{{ socialLink.img }}" class="w-14"
+      /></a>
+      }
+    </div>
+    Hope you enjoy the app!
+  </div>
+  <img src="assets/will.jpg" class="w-96 h-auto" alt="" />
+</div>

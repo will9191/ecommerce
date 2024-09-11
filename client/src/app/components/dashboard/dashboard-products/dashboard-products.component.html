@@ -1,1 +1,27 @@
-<p>dashboard-products works!</p>
+<div class="">
+  <table>
+    <caption>
+      Products
+    </caption>
+    <thead>
+      <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Image</th>
+        <th scope="col">Name</th>
+        <th scope="col">Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (product of products; track $index) {
+      <tr class="">
+        <th>{{ product.id }}</th>
+        <td><img class="w-10 h-10" src="{{ product.image }}" alt="" /></td>
+        <td>{{ product.name }}</td>
+        <td>${{ product.price }}</td>
+      </tr>
+      } @empty {
+      <div>No products found</div>
+      }
+    </tbody>
+  </table>
+</div>

@@ -13,6 +13,11 @@ export class OrdersService {
     return this.httpClient.get<any>(`${apiEndpoint.OrdersEndpoint.userOrders}`);
   }
 
+  getAll(): Observable<any> {
+    return this.httpClient.get<any>(`${apiEndpoint.OrdersEndpoint.base}`);
+  }
+
+
   saveOrder(cartItemsId: number[]): Observable<any> {
     return this.httpClient.post<any>(`${apiEndpoint.OrdersEndpoint.base}`, {cartItemsId});
   }

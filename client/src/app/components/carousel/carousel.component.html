@@ -17,15 +17,15 @@
     ></span>
   </div>
 
-  <button *ngIf="controls" class="btn-carousel btn-prev">
+  <div *ngIf="controls" class="btn-carousel btn-prev">
     <div class="icon-carousel icon-prev" (click)="onPrevClick()">
       {{ btnPrev }}
     </div>
-  </button>
+  </div>
 
-  <button *ngIf="controls" class="btn-carousel btn-next">
+  <div *ngIf="controls" class="btn-carousel btn-next">
     <div class="icon-carousel icon-next" (click)="onNextClick()">
       {{ btnNext }}
     </div>
-  </button>
+  </div>
 </div>

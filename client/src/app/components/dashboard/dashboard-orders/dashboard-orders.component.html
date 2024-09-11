@@ -1,1 +1,40 @@
-<p>dashboard-orders works!</p>
+@if (!orders.length) {
+<div>No orders found!</div>
+} @else { @defer (when orders) {
+<div class="">
+  <table>
+    <caption>
+      Orders
+    </caption>
+    <thead>
+      <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Order Items</th>
+        <th scope="col">Items length</th>
+        <th scope="col">Payment Status</th>
+        <th scope="col">Order Status</th>
+        <th scope="col">Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (order of orders; track $index) {
+      <tr class="">
+        <th>{{ order.id }}</th>
+        <td>
+          @for (product of order.orderItems; track $index) {
+          <img class="w-10 h-10" src="{{ product.product.image }}" alt="" />}
+        </td>
+        <td>{{ order.orderItems.length }}</td>
+        <td>{{ order.payment.paymentStatus }}</td>
+        <td>{{ order.orderStatus }}</td>
+        <td>${{ order.orderPrice }}</td>
+      </tr>
+      }
+    </tbody>
+  </table>
+</div>
+} @placeholder {
+<div class="h-screen items-center justify-center flex">loading...</div>
+}@error {
+<div>Error on loading orders!</div>
+} }

@@ -25,7 +25,7 @@ export class AuthService {
 
           localStorage.setItem(
             'is_admin',
-            JSON.stringify(value.isAdmin || false)
+            JSON.stringify(value.is_admin|| false)
           );
         })
       );
@@ -35,7 +35,8 @@ export class AuthService {
     firstName: string,
     lastName: string,
     email: string,
-    password: string
+    password: string,
+    role: string
   ) {
     return this.httpClient
       .post<LoginResponse>(`${apiEndpoint.AuthEndpoint.register}`, {
@@ -43,6 +44,7 @@ export class AuthService {
         lastName,
         email,
         password,
+        role
       })
       .pipe(
         tap((value) => {
@@ -50,7 +52,7 @@ export class AuthService {
           localStorage.setItem('refresh_token', value.refresh_token);
           localStorage.setItem(
             'is_admin',
-            JSON.stringify(value.isAdmin || false)
+            JSON.stringify(value.is_admin || false)
           );
         })
       );

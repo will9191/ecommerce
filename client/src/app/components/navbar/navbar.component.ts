@@ -27,6 +27,7 @@ import { CartItemComponent } from '../cart-item/cart-item.component';
 import { ToastrService } from 'ngx-toastr';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { AuthService } from '../../services/auth.service';
+import { InfoComponent } from '../info/info.component';
 
 @Component({
   selector: 'app-navbar',
@@ -92,6 +93,10 @@ export class NavbarComponent implements OnInit {
     } else {
       this.router.navigate(['/login']);
     }
+  }
+
+  openInfo() {
+    this.matDialog.open(InfoComponent, { disableClose: false });
   }
 
   getCategories() {
