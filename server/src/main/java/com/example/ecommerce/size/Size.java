@@ -11,7 +11,6 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Size {
-    private int idaa;
     private SizeType name;
     private Integer quantity;
 }

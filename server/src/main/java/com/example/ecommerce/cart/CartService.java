@@ -68,6 +68,8 @@ public class CartService {
         cart.setTotalPrice(this.getTotalPrice(cartItemsList));
         cartRepository.save(cart);
 
+
+
         return ResponseEntity.ok(cart);
     }
 
@@ -117,10 +119,13 @@ public class CartService {
 
     public ResponseEntity<?> getCartByUser(User user) {
         Cart cart = cartRepository.findByUser(user);
-        double totalPrice = 0.0;
-        totalPrice = getTotalPrice(cart.getCartItems());
-        cart.setTotalPrice(totalPrice);
-        cartRepository.save(cart);
+        if (cart == null){
+            Cart newCart = new Cart();
+            newCart.setUser(user);
+            cart= newCart;
+
+            cartRepository.save(cart);
+        }
         return ResponseEntity.ok(cart);
     }
 

@@ -3,12 +3,14 @@ package com.example.ecommerce.order;
 import com.example.ecommerce.payment.PaymentDto;
 import com.example.ecommerce.product.Product;
 import com.example.ecommerce.user.UserService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -19,7 +21,7 @@ public class OrderController {
     private final OrderService service;
     private final UserService userService;
     @PostMapping
-    public ResponseEntity<?> saveOrder(@RequestBody OrderDto orderDto, Principal user) throws Exception {
+    public ResponseEntity<Order> saveOrder(@Valid @RequestBody OrderDto orderDto, Principal user) throws Exception {
         var principalUser = userService.getCurrentUser(user);
 
 
@@ -42,10 +44,15 @@ public class OrderController {
         return ResponseEntity.ok(orderDto);
     }
 
-    @GetMapping()
+    @GetMapping("user")
     public ResponseEntity<?> getOrdersByUser(Principal principalUser){
         var user = userService.getCurrentUser(principalUser);
         return ResponseEntity.ok(service.getOrdersByUser(user));
+    }
+
+    @GetMapping
+    public ResponseEntity<List<Order>> getAll() {
+        return ResponseEntity.ok(service.findAll());
     }
 
     @GetMapping("/{id}")

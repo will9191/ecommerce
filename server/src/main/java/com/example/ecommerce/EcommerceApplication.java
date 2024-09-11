@@ -44,7 +44,6 @@ public class EcommerceApplication {
                     .lastName("Pereira")
                     .email("admin@gmail.com")
                     .password("password")
-                    .coins(500)
                     .role(ADMIN)
                     .build();
             System.out.println("Admin token: " + service.register(admin).getAccessToken());
@@ -74,11 +73,11 @@ public class EcommerceApplication {
             categoryService.save(category3);
 
 
-            var size1 = new Size(1,SizeType.P, 50);
-            var size2 = new Size(2,SizeType.M, 50);
-            var size3 = new Size(3,SizeType.G, 50);
-            var size4 = new Size(4,SizeType.GG, 50);
-            var size5 = new Size(5,SizeType.XG, 50);
+            var size1 = new Size(SizeType.P, 50);
+            var size2 = new Size(SizeType.M, 50);
+            var size3 = new Size(SizeType.G, 50);
+            var size4 = new Size(SizeType.GG, 50);
+            var size5 = new Size(SizeType.XG, 50);
 
             List<Size> sizes = new ArrayList<>(List.of(new Size[]{size1, size2, size3, size4, size5}));
 

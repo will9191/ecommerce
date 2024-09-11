@@ -33,7 +33,7 @@ public class OrderService {
     private final PaymentRepository paymentRepository;
     private final UserRepository userRepository;
 
-    public ResponseEntity<?> saveOrder(OrderDto orderDto, User user) {
+    public Order saveOrder(OrderDto orderDto, User user) {
         Order order = new Order();
         order.setOrderItems(new ArrayList<>());
         Cart cart = cartRepository.findByUser(user);
@@ -69,8 +69,8 @@ public class OrderService {
         order.setOrderStatus(OrderStatus.CREATED);
         order.setOrderPrice(getTotalPrice(orderItemList));
         order.setPayment(payment);
-        repository.save(order);
-        return ResponseEntity.ok(order);
+      return  repository.save(order);
+
     }
 
     public Optional<Order> findById(Long id) {
@@ -106,5 +106,9 @@ public class OrderService {
             totalPrice += orderItem.getPrice() * quantity;
         }
         return totalPrice;
+    }
+
+    public List<Order> findAll(){
+        return repository.findAll();
     }
 }

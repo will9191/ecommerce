@@ -4,6 +4,7 @@ import com.example.ecommerce.config.JwtService;
 import com.example.ecommerce.token.Token;
 import com.example.ecommerce.token.TokenRepository;
 import com.example.ecommerce.token.TokenType;
+import com.example.ecommerce.user.Role;
 import com.example.ecommerce.user.User;
 import com.example.ecommerce.user.UserRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -34,7 +35,6 @@ public class AuthenticationService {
                 .email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
                 .role(request.getRole())
-                .coins(request.getCoins())
                 .build();
         var savedUser = repository.save(user);
         var jwtToken = jwtService.generateToken(user);
@@ -43,6 +43,7 @@ public class AuthenticationService {
         return AuthenticationResponse.builder()
                 .accessToken(jwtToken)
                 .refreshToken(refreshToken)
+                .isAdmin(savedUser.getRole() == Role.ADMIN)
                 .build();
     }
 
@@ -62,6 +63,7 @@ public class AuthenticationService {
         return AuthenticationResponse.builder()
                 .accessToken(jwtToken)
                 .refreshToken(refreshToken)
+                .isAdmin(user.getRole() == Role.ADMIN)
                 .build();
     }
 
