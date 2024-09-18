@@ -1,12 +1,16 @@
 package com.example.ecommerce.auth;
 
 
+import com.example.ecommerce.exceptions.ErrorResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotBlank;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
@@ -15,14 +19,21 @@ import java.io.IOException;
 @RestController
 @RequestMapping("/api/v1/auth")
 @RequiredArgsConstructor
+@Validated
 public class AuthenticationController {
     private final AuthenticationService service;
 
     @PostMapping("/register")
-    public ResponseEntity<AuthenticationResponse> register(
-            @RequestBody RegisterRequest request
-    ) {
-        return ResponseEntity.ok(service.register(request));
+    public ResponseEntity<?> register(
+            @RequestBody @Valid RegisterRequest request
+    ) throws Exception {
+        try{
+            return ResponseEntity.ok(service.register(request));
+        } catch (RuntimeException runtimeException) {
+            ErrorResponse errorResponse = new ErrorResponse(runtimeException.getMessage());
+            return ResponseEntity.badRequest().body(errorResponse);
+        }
+
     }
 
 //        @GetMapping("/profile")

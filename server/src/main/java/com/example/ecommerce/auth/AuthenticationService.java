@@ -28,7 +28,16 @@ public class AuthenticationService {
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
 
-    public AuthenticationResponse register (RegisterRequest request) {
+    public AuthenticationResponse register(RegisterRequest request) {
+        if (request.getFirstName().trim().isBlank() || request.getLastName().trim().isBlank()  || request.getEmail().trim().isBlank()  || request.getPassword().trim().isBlank() ) {
+            throw new RuntimeException("Fill in all fields");
+        }
+
+        var userExist = repository.findByEmail(request.getEmail());
+        if (userExist.isPresent()) {
+            throw new RuntimeException("Email already registered");
+        }
+
         var user = User.builder()
                 .firstName(request.getFirstName())
                 .lastName(request.getLastName())
@@ -78,9 +87,9 @@ public class AuthenticationService {
         tokenRepository.save(token);
     }
 
-    private void revokeAllUserTokens(User user){
+    private void revokeAllUserTokens(User user) {
         var validUserTokens = tokenRepository.findAllValidTokenByUser(user.getId());
-        if(validUserTokens.isEmpty())
+        if (validUserTokens.isEmpty())
             return;
         validUserTokens.forEach(token -> {
             token.setExpired(true);
@@ -96,15 +105,15 @@ public class AuthenticationService {
         final String authHeader = request.getHeader(HttpHeaders.AUTHORIZATION);
         final String refreshToken;
         final String userEmail;
-        if (authHeader == null || !authHeader.startsWith("Bearer ")){
+        if (authHeader == null || !authHeader.startsWith("Bearer ")) {
             return;
         }
         refreshToken = authHeader.substring(7);
         userEmail = jwtService.extractUsername(refreshToken);
-        if(userEmail != null){
+        if (userEmail != null) {
             var user = this.repository.findByEmail(userEmail)
                     .orElseThrow();
-            if (jwtService.isTokenValid(refreshToken, user)){
+            if (jwtService.isTokenValid(refreshToken, user)) {
                 var accessToken = jwtService.generateToken(user);
                 revokeAllUserTokens(user);
                 saveUserToken(user, accessToken);
