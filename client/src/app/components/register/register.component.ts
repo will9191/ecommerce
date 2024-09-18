@@ -57,11 +57,13 @@ export class RegisterComponent {
         this.registerForm.value.lastName,
         this.registerForm.value.email,
         this.registerForm.value.password,
-        "USER"
+        'USER'
       )
       .subscribe({
         next: () => this.router.navigate(['/']),
-        error: () => this.toastrService.error('Error on register!'),
+        error: (data: any) => {
+          this.toastrService.error(data.error.message), console.log(data.message);
+        },
       });
   }
 }
