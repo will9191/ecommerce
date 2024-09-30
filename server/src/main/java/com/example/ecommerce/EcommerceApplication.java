@@ -73,18 +73,18 @@ public class EcommerceApplication {
             categoryService.save(category3);
 
 
-            var size1 = new Size(SizeType.P, 50);
-            var size2 = new Size(SizeType.M, 50);
-            var size3 = new Size(SizeType.G, 50);
-            var size4 = new Size(SizeType.GG, 50);
-            var size5 = new Size(SizeType.XG, 50);
+            var size1 = new Size(SizeType.P, 1);
+            var size2 = new Size(SizeType.M, 1);
+            var size3 = new Size(SizeType.G, 1);
+            var size4 = new Size(SizeType.GG, 1);
+            var size5 = new Size(SizeType.XG, 1);
 
             List<Size> sizes = new ArrayList<>(List.of(new Size[]{size1, size2, size3, size4, size5}));
 
             var product1 = ProductDto.builder()
                     .name("Caktus Jack")
                     .description("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sit amet mattis vulputate enim nulla aliquet porttitor. Accumsan.")
-                    .image("https://www.cretineoficial.com/cdn/shop/products/image_56c5b10f-a2e5-4e38-ad00-0e463f80ffe3_1200x1200.png?v=1664425870")
+                    .image("https://raw.githubusercontent.com/will9191/files/refs/heads/main/travis.png")
                     .price(299)
                     .categoryId(1L)
                     .sizes(sizes)
@@ -95,7 +95,7 @@ public class EcommerceApplication {
             var product2 = ProductDto.builder()
                     .name("Kendrick Lamar")
                     .description("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sit amet mattis vulputate enim nulla aliquet porttitor. Accumsan.")
-                    .image("https://agedarchive.com/cdn/shop/files/KENDRICK-OFFWHITE_1024x1024@2x.png?v=1692202127")
+                    .image("https://raw.githubusercontent.com/will9191/files/refs/heads/main/kendrick.png")
                     .price(299)
                     .categoryId(1L)
                     .sizes(sizes)
@@ -106,7 +106,7 @@ public class EcommerceApplication {
             var product3 = ProductDto.builder()
                     .name("21 Savage")
                     .description("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sit amet mattis vulputate enim nulla aliquet porttitor. Accumsan.")
-                    .image("https://www.styltrap.com/cdn/shop/products/S25c4db6479f34846b5d564423dcb4d20Y.jpg?v=1676481709")
+                    .image("https://raw.githubusercontent.com/will9191/files/refs/heads/main/21.png")
                     .price(299)
                     .categoryId(1L)
                     .sizes(sizes)
@@ -116,7 +116,7 @@ public class EcommerceApplication {
             var product4 = ProductDto.builder()
                     .name("Tupac")
                     .description("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sit amet mattis vulputate enim nulla aliquet porttitor. Accumsan.")
-                    .image("https://ae01.alicdn.com/kf/H82ac43e81b5149239d21a19ed7d825c9t.jpg?width=1500&height=1500&hash=3000")
+                    .image("https://raw.githubusercontent.com/will9191/files/refs/heads/main/tupac.png")
                     .price(299)
                     .categoryId(2L)
                     .sizes(sizes)
@@ -126,7 +126,7 @@ public class EcommerceApplication {
             var product5 = ProductDto.builder()
                     .name("Kobe Bryant")
                     .description("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sit amet mattis vulputate enim nulla aliquet porttitor. Accumsan.")
-                    .image("https://www.cretineoficial.com/cdn/shop/files/421C820D-76F9-452D-B971-2AA09C64C866_1024x1024@2x.jpg?v=1695848725")
+                    .image("https://raw.githubusercontent.com/will9191/files/refs/heads/main/kobe.jpg")
                     .price(299)
                     .categoryId(2L)
                     .sizes(sizes)
@@ -136,7 +136,7 @@ public class EcommerceApplication {
             var product6 = ProductDto.builder()
                     .name("Rodman")
                     .description("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sit amet mattis vulputate enim nulla aliquet porttitor. Accumsan.")
-                    .image("https://www.cretineoficial.com/cdn/shop/products/S15ccfecef1ef405d832bf1bdbb86d8e4T_1024x1024@2x.jpg?v=1686082152")
+                    .image("https://raw.githubusercontent.com/will9191/files/refs/heads/main/rodman.png")
                     .price(299)
                     .categoryId(2L)
                     .sizes(sizes)
@@ -146,7 +146,7 @@ public class EcommerceApplication {
             var product7 = ProductDto.builder()
                     .name("Michael Jordan")
                     .description("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sit amet mattis vulputate enim nulla aliquet porttitor. Accumsan.")
-                    .image("https://www.cretineoficial.com/cdn/shop/files/IMG-9290_1024x1024@2x.jpg?v=1702933282")
+                    .image("https://raw.githubusercontent.com/will9191/files/refs/heads/main/mj.png")
                     .price(299)
                     .categoryId(3L)
                     .sizes(sizes)
@@ -156,7 +156,7 @@ public class EcommerceApplication {
             var product8 = ProductDto.builder()
                     .name("Post Malone")
                     .description("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sit amet mattis vulputate enim nulla aliquet porttitor. Accumsan.")
-                    .image("https://www.cretineoficial.com/cdn/shop/files/IMG-9324_1024x1024@2x.jpg?v=1702966278")
+                    .image("https://raw.githubusercontent.com/will9191/files/refs/heads/main/postmalone.png")
                     .price(299)
                     .categoryId(3L)
                     .sizes(sizes)
@@ -166,7 +166,7 @@ public class EcommerceApplication {
             var product9 = ProductDto.builder()
                     .name("Kurt Kobain")
                     .description("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sit amet mattis vulputate enim nulla aliquet porttitor. Accumsan.")
-                    .image("https://www.cretineoficial.com/cdn/shop/files/IMG-9285_1024x1024@2x.jpg?v=1702932497")
+                    .image("https://raw.githubusercontent.com/will9191/files/refs/heads/main/kurt.png")
                     .price(299)
                     .categoryId(3L)
                     .sizes(sizes)

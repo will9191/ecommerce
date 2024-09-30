@@ -23,7 +23,6 @@ export class ProductComponent implements OnInit {
   constructor(
     private productService: ProductService,
     private cartService: CartService,
-    private toastrService: ToastrService,
     private router: Router,
     private authService: AuthService,
     private toastrComponent: ToastrComponent
@@ -64,8 +63,11 @@ export class ProductComponent implements OnInit {
         console.log(this.quantity);
         console.log(this.data);
         this.cartService.addToCart(this.data).subscribe({
-          next: () => this.toastrService.success('Successfully added!'),
-          error: () => this.router.navigate(['']),
+          next: (data:any) => {this.toastrComponent.showSuccess('Successfully added!'), this.product = data.body.product},
+          error: (data: any) => {
+            this.toastrComponent.showError(data.error.message),
+              console.log(data.error.message);
+          },
         });
       } else {
         this.toastrComponent.showWarning('You should add one size!');

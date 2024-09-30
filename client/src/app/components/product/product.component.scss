@@ -33,3 +33,9 @@
   color: white;
   border-radius: 10px;
 }
+
+.out-of-stock {
+  color: red;
+  opacity: 0.5; /* Opcional: pode deixar o item com aparência desativada */
+  pointer-events: none; /* Opcional: impede a interação com o item, além de estar desabilitado */
+}

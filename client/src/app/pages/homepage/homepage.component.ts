@@ -20,18 +20,18 @@ export class HomepageComponent {
   images = [
     {
       url: '/drop-x',
-      alt: 'black wallpaper',
-      src: 'https://wallpapergod.com/images/hd/black-aesthetic-1920X1080-wallpaper-ch9tk3j5p772ls09.jpeg',
+      alt: '',
+      src: 'assets/wallpaper/d1.png',
     },
     {
       url: '/drop-y',
-      alt: 'white wallpaper',
-      src: 'https://www.hdwallpapers.in/download/white_wallpaper_5_4k_hd_white-1920x1080.jpg',
+      alt: '',
+      src: 'assets/wallpaper/d2.png',
     },
     {
       url: '/drop-z',
-      alt: 'purple wallpaper',
-      src: 'https://wallpaperswide.com/download/abstract_purple_earth-wallpaper-1920x1080.jpg',
+      alt: '',
+      src: 'assets/wallpaper/d3.png',
     },
   ];
 }

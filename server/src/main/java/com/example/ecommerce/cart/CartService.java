@@ -33,6 +33,11 @@ public class CartService {
     private ApplicationAuditAware auditAware;
 
     public ResponseEntity<?> addItemToCart(CartItemDto cartItemDto, Product product, User user) {
+        List<Size> productSizes = product.getSizes();
+        Size productSize = productSizes.stream().filter(psize -> psize.getName().equals(cartItemDto.getSize().getName())).findFirst().orElseThrow(() -> new IllegalArgumentException("Size not found"));
+        if (productSize.getQuantity() <= 0) {
+            throw new RuntimeException("This size is out of stock");
+        }
         Cart cart = cartRepository.findByUser(user);
 
         if (cart == null) {
@@ -48,6 +53,7 @@ public class CartService {
             if (existingCart.getProduct().equals(product) && existingCart.getSize().getName().equals(cartItemDto.getSize().getName())) {
                 Size size = existingCart.getSize();
                 size.setQuantity(existingCart.getSize().getQuantity() + cartItemDto.getSize().getQuantity());
+                this.removeProductSizeQuantity(product, existingCart);
                 existingCart.setSize(size);
                 itemAlreadyExists = true;
                 break;
@@ -60,6 +66,7 @@ public class CartService {
             cartItem.setSize(cartItemDto.getSize());
             cartItem.setCart(cart);
             cartItem.setPrice(product.getPrice());
+            this.removeProductSizeQuantity(product, cartItem);
             cartItemRepository.save(cartItem);
             cartItemsList.add(cartItem);
         }
@@ -68,10 +75,30 @@ public class CartService {
         cart.setTotalPrice(this.getTotalPrice(cartItemsList));
         cartRepository.save(cart);
 
+        CartProductDTO response = new CartProductDTO(cart, product);
 
-
-        return ResponseEntity.ok(cart);
+        return ResponseEntity.ok(response);
     }
+
+    public void removeProductSizeQuantity(Product product, CartItem cartItem) {
+        List<Size> productSizes = product.getSizes();
+        Size productSize = productSizes.stream().filter(psize -> psize.getName().equals(cartItem.getSize().getName())).findFirst().orElseThrow(() -> new IllegalArgumentException("Size not found"));
+        if (productSize.getQuantity() - cartItem.getSize().getQuantity() >= 0) {
+            productSize.setQuantity(productSize.getQuantity() - cartItem.getSize().getQuantity());
+            product.setSizes(productSizes);
+        } else {
+            throw new RuntimeException("Size not available");
+        }
+
+    }
+
+    public void addProductSizeQuantity(Product product, CartItem cartItem) {
+        List<Size> productSizes = product.getSizes();
+        Size productSize = productSizes.stream().filter(psize -> psize.getName().equals(cartItem.getSize().getName())).findFirst().orElseThrow(() -> new IllegalArgumentException("Size not found"));
+        productSize.setQuantity(productSize.getQuantity() + cartItem.getSize().getQuantity());
+        product.setSizes(productSizes);
+    }
+
 
     public ResponseEntity<?> removeCartItem(Long cartId, User user) {
         Cart cart = cartRepository.findByUser(user);
@@ -80,6 +107,7 @@ public class CartService {
             var cartItemExists = cartItem.get();
             cart.getCartItems().remove(cartItemExists);
             cart.setTotalPrice(this.getTotalPrice(cart.getCartItems()));
+            this.addProductSizeQuantity(cartItemExists.getProduct(), cartItemExists);
             cartRepository.save(cart);
             return ResponseEntity.ok(cart);
         } else {
@@ -101,6 +129,7 @@ public class CartService {
             cartItem.setSize(size);
         }
         cart.setTotalPrice(this.getTotalPrice(cart.getCartItems()));
+        this.addProductSizeQuantity(cartItem.getProduct(), cartItem);
         cartRepository.save(cart);
         return ResponseEntity.ok(cart);
     }
@@ -113,16 +142,17 @@ public class CartService {
         size.setQuantity(size.getQuantity() + 1);
         cartItem.setSize(size);
         cart.setTotalPrice(this.getTotalPrice(cart.getCartItems()));
+        this.removeProductSizeQuantity(cartItem.getProduct(), cartItem);
         cartRepository.save(cart);
         return ResponseEntity.ok(cart);
     }
 
     public ResponseEntity<?> getCartByUser(User user) {
         Cart cart = cartRepository.findByUser(user);
-        if (cart == null){
+        if (cart == null) {
             Cart newCart = new Cart();
             newCart.setUser(user);
-            cart= newCart;
+            cart = newCart;
 
             cartRepository.save(cart);
         }

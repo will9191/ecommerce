@@ -77,6 +77,9 @@ export class CartItemComponent implements OnInit {
       next: (data: any) => {
         this.cart = data.body;
       },
+      error: (data: any) => {
+        this.toastrComponent.showError(data.error.message);
+      },
     });
   }
 

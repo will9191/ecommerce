@@ -10,7 +10,10 @@
     <div class="items-center justify-center flex flex-col">
       <ul class="selectClass">
         @for (size of product.sizes; track $index) {
-        <li class="optionClass">
+        <li
+          class="optionClass"
+          [ngClass]="{ 'out-of-stock': size.quantity <= 0 }"
+        >
           <input
             id="{{ size.name }}"
             type="radio"
