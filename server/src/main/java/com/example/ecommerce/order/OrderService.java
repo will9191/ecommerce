@@ -70,30 +70,31 @@ public class OrderService {
         order.setOrderStatus(OrderStatus.CREATED);
         order.setOrderPrice(getTotalPrice(orderItemList));
         order.setPayment(payment);
-      return  repository.save(order);
+        return repository.save(order);
 
     }
-
 
 
     public Optional<Order> findById(Long id) {
         return repository.findById(id);
     }
 
-    public void payOrder(PaymentDto paymentDto, User user) throws Exception {
-        Optional<Payment> payment = paymentRepository.findById(paymentDto.getPaymentId());
-        if (payment.isEmpty()) {
-            throw new Exception();
-        }
-        if (user.getCoins() > payment.get().getAmount()) {
-            payment.get().setPaymentStatus(PaymentStatus.PAID);
-            payment.get().getOrder().setOrderStatus(OrderStatus.PAID);
-            paymentRepository.save(payment.get());
+    public ResponseEntity<?> payOrder(Payment payment, User user) throws Exception {
+        if (payment.getPaymentStatus() == PaymentStatus.NOTPAID) {
 
-            user.setCoins(user.getCoins() - payment.get().getAmount());
-            userRepository.save(user);
+            if (user.getCoins() > payment.getAmount()) {
+                payment.setPaymentStatus(PaymentStatus.PAID);
+                payment.getOrder().setOrderStatus(OrderStatus.PAID);
+                paymentRepository.save(payment);
+
+                user.setCoins(user.getCoins() - payment.getAmount());
+                userRepository.save(user);
+                return ResponseEntity.ok(payment.getOrder());
+            } else {
+                throw new RuntimeException("Not enough coins!");
+            }
         } else {
-            throw new Exception("Not enough coins!");
+            throw new RuntimeException("Order already Paid!");
         }
     }
 
@@ -111,7 +112,7 @@ public class OrderService {
         return totalPrice;
     }
 
-    public List<Order> findAll(){
+    public List<Order> findAll() {
         return repository.findAll();
     }
 }

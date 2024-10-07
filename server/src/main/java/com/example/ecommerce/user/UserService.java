@@ -2,6 +2,7 @@ package com.example.ecommerce.user;
 
 import com.example.ecommerce.auditing.ApplicationAuditAware;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Service;
 
@@ -27,6 +28,12 @@ public class UserService {
                 .orders(user.getOrders())
                 .tokens(user.getTokens())
                 .role(user.getRole()).build();
+    }
+
+    public ResponseEntity<?> addCoins(double quantity, User user){
+        user.setCoins(user.getCoins() + quantity);
+        repository.save(user);
+        return ResponseEntity.ok(user.getCoins());
     }
 
     public List<User> findAll() {

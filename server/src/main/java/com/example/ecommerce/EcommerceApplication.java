@@ -45,6 +45,7 @@ public class EcommerceApplication {
                     .email("admin@gmail.com")
                     .password("password")
                     .role(ADMIN)
+                    .coins(500)
                     .build();
             System.out.println("Admin token: " + service.register(admin).getAccessToken());
 

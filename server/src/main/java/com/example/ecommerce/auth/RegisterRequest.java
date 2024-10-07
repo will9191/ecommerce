@@ -23,4 +23,5 @@ public class RegisterRequest {
 
     private String password;
     private Role role;
+    private double coins;
 }
