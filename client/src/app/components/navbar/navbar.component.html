@@ -18,6 +18,10 @@
           class="cursor-pointer"
           name="matDashboardOutline"
         />
+        <div class="flex cursor-pointer" routerLink="coins">
+          <div class="text-yellow-500">$</div>
+          {{ this.userService.profileCoins$ | async }}
+        </div>
         <div class="relative flex p-1.5" (click)="openCart()">
           <div
             class="absolute top-0 right-0 bg-red-800 text-white w-3.5 h-3.5 rounded-full text-xs"

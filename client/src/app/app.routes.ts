@@ -19,6 +19,7 @@ import { DashboardSizesComponent } from './components/dashboard/dashboard-sizes/
 import { CartItemComponent } from './components/cart-item/cart-item.component';
 import { AdminGuardService } from './services/admin-guard.service';
 import { OrderDetailsComponent } from './components/order-details/order-details.component';
+import { CoinsComponent } from './components/coins/coins.component';
 
 export const routes: Routes = [
   {
@@ -28,6 +29,11 @@ export const routes: Routes = [
       {
         path: '',
         component: HomepageComponent,
+        title: 'Home',
+      },
+      {
+        path: 'coins',
+        component: CoinsComponent,
         title: 'Home',
       },
 

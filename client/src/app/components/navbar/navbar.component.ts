@@ -28,6 +28,7 @@ import { ToastrService } from 'ngx-toastr';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { AuthService } from '../../services/auth.service';
 import { InfoComponent } from '../info/info.component';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-navbar',
@@ -59,6 +60,7 @@ export class NavbarComponent implements OnInit {
   constructor(
     private categoryService: CategoryService,
     public cartService: CartService,
+    public userService: UserService,
     private toastrService: ToastrService,
     private router: Router,
     private matDialog: MatDialog,
@@ -73,6 +75,7 @@ export class NavbarComponent implements OnInit {
   ngOnInit(): void {
     this.getCategories();
     this.getCart();
+    this.getProfileCoins();
   }
 
   get isLoggedIn(): boolean {
@@ -85,6 +88,10 @@ export class NavbarComponent implements OnInit {
 
   getCart() {
     return this.cartService.loadCart();
+  }
+
+  getProfileCoins() {
+    return this.userService.loadProfile();
   }
 
   openCart() {

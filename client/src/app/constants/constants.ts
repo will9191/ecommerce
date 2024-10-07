@@ -23,9 +23,11 @@ export const apiEndpoint = {
   },
   UserEndpoint: {
     profile: `${API_URL}/api/v1/user/profile`,
+    addCoins: `${API_URL}/api/v1/user/addCoins`
   },
   OrdersEndpoint: {
     base: `${API_URL}/api/v1/order`,
     userOrders: `${API_URL}/api/v1/order`,
+    pay: `${API_URL}/api/v1/order/pay`
   },
 };

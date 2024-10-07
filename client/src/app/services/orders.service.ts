@@ -17,14 +17,19 @@ export class OrdersService {
     return this.httpClient.get<any>(`${apiEndpoint.OrdersEndpoint.base}`);
   }
 
+  pay(orderId: number): Observable<any> {
+    return this.httpClient.post<any>(`${apiEndpoint.OrdersEndpoint.pay}`, 
+      orderId,
+    );
+  }
 
   saveOrder(cartItemsId: number[]): Observable<any> {
-    return this.httpClient.post<any>(`${apiEndpoint.OrdersEndpoint.base}`, {cartItemsId});
+    return this.httpClient.post<any>(`${apiEndpoint.OrdersEndpoint.base}`, {
+      cartItemsId,
+    });
   }
 
   getOrderById(id: number): Observable<any> {
-    return this.httpClient.get<any>(
-      `${apiEndpoint.OrdersEndpoint.base}/${id}`
-    );
+    return this.httpClient.get<any>(`${apiEndpoint.OrdersEndpoint.base}/${id}`);
   }
 }
